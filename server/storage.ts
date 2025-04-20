@@ -40,7 +40,7 @@ import {
   type InsertSkill
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc, asc, and, sql, like, isNull, not } from "drizzle-orm";
+import { eq, desc, asc, and, sql, like, isNull, not, lt, gt } from "drizzle-orm";
 import session from "express-session";
 import connectPg from "connect-pg-simple";
 import { pool } from "./db";
@@ -310,13 +310,18 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getAllBlogPosts(includeUnpublished: boolean = false): Promise<BlogPost[]> {
-    let query = db.select().from(blogPosts);
-    
     if (!includeUnpublished) {
-      query = query.where(eq(blogPosts.published, true));
+      return await db
+        .select()
+        .from(blogPosts)
+        .where(eq(blogPosts.published, true))
+        .orderBy(desc(blogPosts.publishedAt));
+    } else {
+      return await db
+        .select()
+        .from(blogPosts)
+        .orderBy(desc(blogPosts.publishedAt));
     }
-    
-    return await query.orderBy(desc(blogPosts.publishedAt));
   }
 
   async updateBlogPost(id: number, postData: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
@@ -431,6 +436,359 @@ export class DatabaseStorage implements IStorage {
         .returning();
       return newSetting;
     }
+  }
+
+  // Contact info operations
+  async getContactInfo(): Promise<ContactInfo[]> {
+    return await db
+      .select()
+      .from(contactInfo)
+      .orderBy(asc(contactInfo.type));
+  }
+
+  async createContactInfo(info: InsertContactInfo): Promise<ContactInfo> {
+    const [newInfo] = await db
+      .insert(contactInfo)
+      .values(info)
+      .returning();
+    return newInfo;
+  }
+
+  async updateContactInfo(id: number, data: Partial<InsertContactInfo>): Promise<ContactInfo | undefined> {
+    const [updatedInfo] = await db
+      .update(contactInfo)
+      .set(data)
+      .where(eq(contactInfo.id, id))
+      .returning();
+    return updatedInfo;
+  }
+
+  async deleteContactInfo(id: number): Promise<boolean> {
+    await db
+      .delete(contactInfo)
+      .where(eq(contactInfo.id, id));
+    return true;
+  }
+
+  // Social links operations
+  async getSocialLinks(): Promise<SocialLink[]> {
+    return await db
+      .select()
+      .from(socialLinks)
+      .orderBy(asc(socialLinks.displayOrder));
+  }
+
+  async createSocialLink(link: InsertSocialLink): Promise<SocialLink> {
+    // Set display order to max + 1
+    const existingLinks = await this.getSocialLinks();
+    const maxOrder = existingLinks.length > 0 
+      ? Math.max(...existingLinks.map(l => l.displayOrder || 0)) 
+      : 0;
+    
+    const [newLink] = await db
+      .insert(socialLinks)
+      .values({
+        ...link,
+        displayOrder: maxOrder + 1
+      })
+      .returning();
+    return newLink;
+  }
+
+  async updateSocialLink(id: number, data: Partial<InsertSocialLink>): Promise<SocialLink | undefined> {
+    const [updatedLink] = await db
+      .update(socialLinks)
+      .set(data)
+      .where(eq(socialLinks.id, id))
+      .returning();
+    return updatedLink;
+  }
+
+  async deleteSocialLink(id: number): Promise<boolean> {
+    await db
+      .delete(socialLinks)
+      .where(eq(socialLinks.id, id));
+    return true;
+  }
+
+  async updateSocialLinkOrder(id: number, direction: 'up' | 'down'): Promise<SocialLink | undefined> {
+    // Get the current link
+    const [currentLink] = await db
+      .select()
+      .from(socialLinks)
+      .where(eq(socialLinks.id, id));
+    
+    if (!currentLink) return undefined;
+    
+    // Get the adjacent link
+    const operator = direction === 'up' ? lt : gt;
+    const orderBy = direction === 'up' ? desc : asc;
+    
+    const [adjacentLink] = await db
+      .select()
+      .from(socialLinks)
+      .where(operator(socialLinks.displayOrder, currentLink.displayOrder))
+      .orderBy(orderBy(socialLinks.displayOrder))
+      .limit(1);
+    
+    if (!adjacentLink) return currentLink; // No adjacent link found
+    
+    // Swap the order
+    await db
+      .update(socialLinks)
+      .set({ displayOrder: currentLink.displayOrder })
+      .where(eq(socialLinks.id, adjacentLink.id));
+    
+    const [updatedLink] = await db
+      .update(socialLinks)
+      .set({ displayOrder: adjacentLink.displayOrder })
+      .where(eq(socialLinks.id, id))
+      .returning();
+    
+    return updatedLink;
+  }
+
+  // Testimonials operations
+  async getTestimonials(): Promise<Testimonial[]> {
+    return await db
+      .select()
+      .from(testimonials)
+      .orderBy(desc(testimonials.createdAt));
+  }
+
+  async createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial> {
+    const [newTestimonial] = await db
+      .insert(testimonials)
+      .values(testimonial)
+      .returning();
+    return newTestimonial;
+  }
+
+  async updateTestimonial(id: number, data: Partial<InsertTestimonial>): Promise<Testimonial | undefined> {
+    const [updatedTestimonial] = await db
+      .update(testimonials)
+      .set(data)
+      .where(eq(testimonials.id, id))
+      .returning();
+    return updatedTestimonial;
+  }
+
+  async deleteTestimonial(id: number): Promise<boolean> {
+    await db
+      .delete(testimonials)
+      .where(eq(testimonials.id, id));
+    return true;
+  }
+
+  // Hero settings operations
+  async getHeroSettings(): Promise<HeroSetting | undefined> {
+    const [settings] = await db
+      .select()
+      .from(heroSettings)
+      .limit(1);
+    return settings;
+  }
+
+  async updateHeroSettings(data: Partial<InsertHeroSetting>): Promise<HeroSetting> {
+    const existingSettings = await this.getHeroSettings();
+    
+    if (existingSettings) {
+      const [updatedSettings] = await db
+        .update(heroSettings)
+        .set({
+          ...data,
+          updatedAt: new Date()
+        })
+        .where(eq(heroSettings.id, existingSettings.id))
+        .returning();
+      return updatedSettings;
+    } else {
+      const [newSettings] = await db
+        .insert(heroSettings)
+        .values({
+          ...data as InsertHeroSetting,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        })
+        .returning();
+      return newSettings;
+    }
+  }
+
+  // Current focus operations
+  async getCurrentFocus(): Promise<CurrentFocus[]> {
+    return await db
+      .select()
+      .from(currentFocus)
+      .orderBy(asc(currentFocus.displayOrder));
+  }
+
+  async createCurrentFocus(focus: InsertCurrentFocus): Promise<CurrentFocus> {
+    // Set display order to max + 1
+    const existingFocus = await this.getCurrentFocus();
+    const maxOrder = existingFocus.length > 0
+      ? Math.max(...existingFocus.map(f => f.displayOrder || 0))
+      : 0;
+    
+    const [newFocus] = await db
+      .insert(currentFocus)
+      .values({
+        ...focus,
+        displayOrder: maxOrder + 1
+      })
+      .returning();
+    return newFocus;
+  }
+
+  async updateCurrentFocus(id: number, data: Partial<InsertCurrentFocus>): Promise<CurrentFocus | undefined> {
+    const [updatedFocus] = await db
+      .update(currentFocus)
+      .set({
+        ...data,
+        updatedAt: new Date()
+      })
+      .where(eq(currentFocus.id, id))
+      .returning();
+    return updatedFocus;
+  }
+
+  async deleteCurrentFocus(id: number): Promise<boolean> {
+    await db
+      .delete(currentFocus)
+      .where(eq(currentFocus.id, id));
+    return true;
+  }
+
+  async updateCurrentFocusOrder(id: number, direction: 'up' | 'down'): Promise<CurrentFocus | undefined> {
+    // Similar to social links order update
+    const [current] = await db
+      .select()
+      .from(currentFocus)
+      .where(eq(currentFocus.id, id));
+    
+    if (!current) return undefined;
+    
+    const operator = direction === 'up' ? lt : gt;
+    const orderBy = direction === 'up' ? desc : asc;
+    
+    const [adjacent] = await db
+      .select()
+      .from(currentFocus)
+      .where(operator(currentFocus.displayOrder, current.displayOrder))
+      .orderBy(orderBy(currentFocus.displayOrder))
+      .limit(1);
+    
+    if (!adjacent) return current;
+    
+    await db
+      .update(currentFocus)
+      .set({ displayOrder: current.displayOrder })
+      .where(eq(currentFocus.id, adjacent.id));
+    
+    const [updated] = await db
+      .update(currentFocus)
+      .set({ displayOrder: adjacent.displayOrder })
+      .where(eq(currentFocus.id, id))
+      .returning();
+    
+    return updated;
+  }
+
+  // Resume operations - using site settings for storage
+  async getResumeSetting(): Promise<{ url: string; is_public: boolean; type: string } | undefined> {
+    const setting = await this.getSetting('resume');
+    if (!setting || !setting.valueJson) return undefined;
+    
+    try {
+      return JSON.parse(setting.valueJson);
+    } catch (e) {
+      return undefined;
+    }
+  }
+
+  async updateResumeSetting(data: { url: string; is_public: boolean; type: string }): Promise<{ url: string; is_public: boolean; type: string }> {
+    await this.updateSetting('resume', null, data);
+    return data;
+  }
+
+  async deleteResumeSetting(): Promise<boolean> {
+    const setting = await this.getSetting('resume');
+    if (setting) {
+      await db
+        .delete(siteSettings)
+        .where(eq(siteSettings.key, 'resume'));
+    }
+    return true;
+  }
+
+  // Biography operations
+  async getBiographyEntries(): Promise<BiographyEntry[]> {
+    return await db
+      .select()
+      .from(biographyEntries)
+      .orderBy(desc(biographyEntries.date));
+  }
+
+  async createBiographyEntry(entry: InsertBiographyEntry): Promise<BiographyEntry> {
+    const [newEntry] = await db
+      .insert(biographyEntries)
+      .values(entry)
+      .returning();
+    return newEntry;
+  }
+
+  async updateBiographyEntry(id: number, data: Partial<InsertBiographyEntry>): Promise<BiographyEntry | undefined> {
+    const [updatedEntry] = await db
+      .update(biographyEntries)
+      .set({
+        ...data,
+        updatedAt: new Date()
+      })
+      .where(eq(biographyEntries.id, id))
+      .returning();
+    return updatedEntry;
+  }
+
+  async deleteBiographyEntry(id: number): Promise<boolean> {
+    await db
+      .delete(biographyEntries)
+      .where(eq(biographyEntries.id, id));
+    return true;
+  }
+
+  // Skills operations
+  async getSkills(): Promise<Skill[]> {
+    return await db
+      .select()
+      .from(skills)
+      .orderBy(asc(skills.category), asc(skills.name));
+  }
+
+  async createSkill(skill: InsertSkill): Promise<Skill> {
+    const [newSkill] = await db
+      .insert(skills)
+      .values(skill)
+      .returning();
+    return newSkill;
+  }
+
+  async updateSkill(id: number, data: Partial<InsertSkill>): Promise<Skill | undefined> {
+    const [updatedSkill] = await db
+      .update(skills)
+      .set({
+        ...data,
+        updatedAt: new Date()
+      })
+      .where(eq(skills.id, id))
+      .returning();
+    return updatedSkill;
+  }
+
+  async deleteSkill(id: number): Promise<boolean> {
+    await db
+      .delete(skills)
+      .where(eq(skills.id, id));
+    return true;
   }
 }
 
