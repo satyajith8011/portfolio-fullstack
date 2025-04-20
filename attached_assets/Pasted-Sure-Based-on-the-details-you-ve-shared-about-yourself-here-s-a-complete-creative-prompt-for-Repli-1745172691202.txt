@@ -1,0 +1,50 @@
+Sure! Based on the details you’ve shared about yourself, here’s a complete creative prompt for Replit AI to design your portfolio website:
+
+⸻
+
+Creative Prompt for Replit AI Agent:
+
+“Design a personalized, minimalist portfolio website for Satyajit Halder. The site should reflect my passion for technology, gaming, creativity, and my love for food while showcasing my journey in the IT world. The design should be sleek, clean, yet interactive, with subtle animations that make the experience unique and engaging.
+
+Sections:
+	1.	Home:
+	•	A welcoming section with a tagline like ‘Turning Coffee into Code, and Ideas into Reality’.
+	•	Include a unique, animated hero section with an engaging introduction. Use a creative background (perhaps a soft gradient or a dynamic animation that reacts to user scroll or hover).
+	•	The background should transition smoothly as visitors scroll.
+	2.	Biography:
+	•	A timeline-style section that takes visitors through my journey, from my early days in Montfort School, Guwahati, to becoming an IT student.
+	•	The timeline should include key milestones in my education, achievements, and personal interests.
+	•	Add creative icons or illustrations to represent the different stages of my life and career (such as books for education, a computer for coding, etc.).
+	•	Ensure this section feels interactive with smooth transitions between different phases.
+	3.	About Me:
+	•	Showcase my skills in coding, IT, gaming, and creative interests (such as painting) in a visually rich way.
+	•	Use a mix of infographics, hover effects, or interactive sliders.
+	•	Highlight that I love turning ideas into code, playing games, and experimenting with tech.
+	•	Add a personal touch by incorporating small illustrations or icons representing these hobbies (such as a controller for gaming or a brush for painting).
+	4.	Projects & Achievements:
+	•	Display my projects with interactive cards or carousels. Key projects include:
+	•	Blockchain-Based Identity Verification System (focusing on security and privacy).
+	•	A section dedicated to my Smart Safety Device project.
+	•	Include a brief description of each project and allow visitors to click on them for more details.
+	•	Use icons, hover effects, or subtle animations when visitors hover over each project to highlight their significance.
+	5.	Blog:
+	•	A journal-style blog section where I can share thoughts, tech tutorials, and random musings.
+	•	Use a clean, grid-style format with a touch of creativity.
+	•	Allow for future posts with ease and flexibility—add an admin section where I can easily update the blog or add new entries.
+	6.	Contact Information:
+	•	A sleek, interactive contact form where visitors can reach out to me. Include options to connect on LinkedIn, email, or through social media.
+	•	Add a unique background design (subtle, maybe a gradient or a soft animation). The form should be user-friendly with a fun, creative design.
+	7.	Social Media:
+	•	Include icons for LinkedIn, Instagram, GitHub, etc., each with smooth hover effects or micro-animations to make them interactive.
+	•	These should lead visitors directly to my professional profiles, with a creative flair to make them stand out.
+
+Design & Features:
+	•	Color Scheme: Simple, with a blend of modern and techy vibes—light and dark shades, with pops of color to create emphasis.
+	•	Typography: Clean, modern fonts with a bit of character. The text should be easy to read, with a slight artistic touch for titles and headers.
+	•	Animations: Subtle animations that enhance user experience but don’t overwhelm it. For example, smooth scrolling, hover effects, and transitions between sections.
+	•	Responsiveness: The website should work seamlessly on all devices—mobile, tablet, and desktop.
+	•	Admin Panel: Add an easy-to-use backend admin page where I can update my biography, projects, blog posts, and contact information without coding knowledge. Ensure it’s intuitive and simple to use.
+
+⸻
+
+This prompt blends both professional and creative elements, showcasing your tech skills and your interests in a visually interactive way while keeping things simple to manage in the future.
