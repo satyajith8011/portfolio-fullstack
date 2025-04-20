@@ -81,21 +81,32 @@ const AboutMe = () => {
             variants={sectionVariants}
             initial="hidden"
             animate={controls}
+            className="space-y-4"
           >
             <h2 className="text-3xl md:text-4xl font-bold font-['Space_Grotesk'] text-gray-900 mb-6">
               About Me
             </h2>
-            <p className="text-gray-600 mb-6">
-              I'm a passionate IT student with a love for turning complex
-              problems into elegant solutions. When I'm not coding, you'll find
-              me gaming, exploring new technologies, or expressing my creativity
-              through painting.
+            <p className="text-gray-600 mb-4">
+              I'm Satyajit Halder — a passionate tech enthusiast, web developer, and lifelong learner with a background 
+              that blends the precision of electronics with the innovation of code.
+            </p>
+            <p className="text-gray-600 mb-4">
+              I began my journey with a Diploma in Electronics & Communication Engineering (ECE), 
+              where I developed a solid understanding of circuits, systems, and signal processing. 
+              That foundation sparked my curiosity for how hardware and software intertwine — and 
+              soon led me deeper into the world of Information Technology, where I'm currently pursuing my degree.
+            </p>
+            <p className="text-gray-600 mb-4">
+              Today, I specialize in full-stack web development with a strong focus on the MEAN stack, 
+              while exploring advanced technologies like blockchain, cryptography, and decentralized applications. 
+              My projects reflect a desire to make tech meaningful — from building a Blockchain-Based Identity 
+              Verification System to working on a smart safety device for women that uses secure, real-time evidence capture.
             </p>
             <p className="text-gray-600 mb-8">
-              My approach combines technical expertise with creativity, allowing
-              me to develop innovative solutions that are both functional and
-              visually appealing. I believe in continuous learning and pushing
-              boundaries to create meaningful experiences.
+              Beyond development, I see tech as an artistic tool — one that blends logic with creativity. 
+              I love designing intuitive user interfaces, exploring gamified learning, and turning everyday 
+              ideas into digital experiences. When I'm not coding, you'll likely find me gaming, discovering 
+              new food spots, or imagining my next big build.
             </p>
 
             <div className="flex flex-wrap gap-3 mb-8">
@@ -117,6 +128,10 @@ const AboutMe = () => {
                 </div>
               ))}
             </div>
+            
+            <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600">
+              "Coffee-powered. Code-driven. Curiosity-led. Let's build something unforgettable."
+            </blockquote>
           </motion.div>
 
           <motion.div
