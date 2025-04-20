@@ -8,8 +8,9 @@ interface EmptyStateProps {
   description: string;
   icon?: ReactNode;
   action?: {
-    href: string;
+    href?: string;
     label: string;
+    onClick?: () => void;
   };
 }
 

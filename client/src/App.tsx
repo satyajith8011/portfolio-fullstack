@@ -29,6 +29,7 @@ import AdminAchievementsPage from "@/pages/admin/achievements";
 import AdminAchievementNewPage from "@/pages/admin/achievements/new";
 import AdminAchievementEditPage from "@/pages/admin/achievements/[id]";
 import AdminMessagesPage from "@/pages/admin/messages";
+import AdminBiographyPage from "@/pages/admin/biography";
 
 // Lazy load admin pages to reduce initial bundle size
 import { lazy, Suspense } from "react";
@@ -79,12 +80,8 @@ function Router() {
       {/* Messages Section */}
       <ProtectedRoute path="/admin/messages" component={AdminMessagesPage} adminOnly />
       
-      {/* Other Admin Routes - Temporary */}
-      <ProtectedRoute path="/admin/biography" component={() => (
-        <Suspense fallback={<Loading />}>
-          <AdminDashboard />
-        </Suspense>
-      )} adminOnly />
+      {/* Biography Section */}
+      <ProtectedRoute path="/admin/biography" component={AdminBiographyPage} adminOnly />
       <ProtectedRoute path="/admin/current-work" component={() => (
         <Suspense fallback={<Loading />}>
           <AdminDashboard />

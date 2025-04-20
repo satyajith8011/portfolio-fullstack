@@ -72,18 +72,19 @@ export default function AdminBiographyPage() {
   const { data: biographyEntries = [], isLoading } = useQuery({
     queryKey: ["/api/admin/biography"],
     queryFn: async () => {
-      const res = await fetch("/api/admin/biography");
-      if (!res.ok) {
-        if (res.status === 404) {
-          return []; // Return empty array if endpoint not implemented
+      try {
+        const res = await fetch("/api/admin/biography");
+        if (!res.ok) {
+          if (res.status === 404) {
+            return []; // Return empty array if endpoint not implemented
+          }
+          throw new Error("Failed to fetch biography entries");
         }
-        throw new Error("Failed to fetch biography entries");
+        return res.json();
+      } catch (error) {
+        console.error("Error fetching biography entries:", error);
+        return []; // Return empty array on error
       }
-      return res.json();
-    },
-    onError: () => {
-      // If API fails, return empty array
-      return [];
     }
   });
   
@@ -233,7 +234,7 @@ export default function AdminBiographyPage() {
           title={editingId ? "Edit Timeline Entry" : "Add Timeline Entry"}
           description={editingId ? "Update a timeline entry" : "Create a new timeline entry"}
           onSubmit={handleSubmit}
-          onCancel={resetForm}
+          cancelHref="/admin/biography"
           isPending={createMutation.isPending || updateMutation.isPending}
           submitLabel={editingId ? "Save Changes" : "Add Entry"}
         >
