@@ -1,0 +1,28 @@
+Satyajit Halder
+Software Developer & Tech Enthusiast
+satyajith500@gmail.com | +91 90357 93685
+
+EDUCATION
+- Currently pursuing Information Technology at Parul University, Vadodara, Gujarat
+- Diploma in Electronics & Communication Engineering, RJS Polytechnic, Bangalore
+
+EXPERIENCE
+- Developed Blockchain-Based Identity Verification System
+- Created Smart Safety Device for enhanced personal security
+
+SKILLS
+- Web Development: HTML, CSS, JavaScript, React
+- Blockchain Technologies
+- UI/UX Design
+- Problem Solving
+- Creative Coding
+
+CONTACT INFORMATION
+Email: satyajith500@gmail.com
+Phone: +91 90357 93685
+Location: Bangalore, Karnataka, India
+LinkedIn: https://www.linkedin.com/in/satyajith-halder-6423a822a/
+GitHub: https://github.com/satyajith8011
+Instagram: https://www.instagram.com/satyajith05/
+
+Note: This is a placeholder text file. You should replace this with an actual PDF resume.
