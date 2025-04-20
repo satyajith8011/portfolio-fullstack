@@ -25,6 +25,10 @@ import AdminProjectEditPage from "@/pages/admin/projects/[id]";
 import AdminBlogsPage from "@/pages/admin/blogs";
 import AdminBlogNewPage from "@/pages/admin/blogs/new";
 import AdminBlogEditPage from "@/pages/admin/blogs/[id]";
+import AdminAchievementsPage from "@/pages/admin/achievements";
+import AdminAchievementNewPage from "@/pages/admin/achievements/new";
+import AdminAchievementEditPage from "@/pages/admin/achievements/[id]";
+import AdminMessagesPage from "@/pages/admin/messages";
 
 // Lazy load admin pages to reduce initial bundle size
 import { lazy, Suspense } from "react";
@@ -67,12 +71,15 @@ function Router() {
       <ProtectedRoute path="/admin/blogs/new" component={AdminBlogNewPage} adminOnly />
       <ProtectedRoute path="/admin/blogs/:id" component={AdminBlogEditPage} adminOnly />
       
+      {/* Achievements Section */}
+      <ProtectedRoute path="/admin/achievements" component={AdminAchievementsPage} adminOnly />
+      <ProtectedRoute path="/admin/achievements/new" component={AdminAchievementNewPage} adminOnly />
+      <ProtectedRoute path="/admin/achievements/:id" component={AdminAchievementEditPage} adminOnly />
+      
+      {/* Messages Section */}
+      <ProtectedRoute path="/admin/messages" component={AdminMessagesPage} adminOnly />
+      
       {/* Other Admin Routes - Temporary */}
-      <ProtectedRoute path="/admin/achievements" component={() => (
-        <Suspense fallback={<Loading />}>
-          <AdminDashboard />
-        </Suspense>
-      )} adminOnly />
       <ProtectedRoute path="/admin/biography" component={() => (
         <Suspense fallback={<Loading />}>
           <AdminDashboard />
@@ -104,11 +111,6 @@ function Router() {
         </Suspense>
       )} adminOnly />
       <ProtectedRoute path="/admin/hero" component={() => (
-        <Suspense fallback={<Loading />}>
-          <AdminDashboard />
-        </Suspense>
-      )} adminOnly />
-      <ProtectedRoute path="/admin/messages" component={() => (
         <Suspense fallback={<Loading />}>
           <AdminDashboard />
         </Suspense>
