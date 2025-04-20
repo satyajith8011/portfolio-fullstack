@@ -45,6 +45,94 @@ const generateYears = () => {
   return years;
 };
 
+// Helper function to render biography entries
+function renderBiographyEntries(
+  biographyEntries: any[], 
+  biographyTypes: { value: string; label: string }[],
+  handleEditEntry: (entry: any) => void,
+  deleteMutation: any
+) {
+  // Group entries by year
+  const entriesByYear: Record<string, any[]> = {};
+  
+  biographyEntries.forEach((entry: any) => {
+    const year = entry.year || "Unknown";
+    if (!entriesByYear[year]) entriesByYear[year] = [];
+    entriesByYear[year].push(entry);
+  });
+  
+  // Sort years in descending order
+  const sortedYears = Object.keys(entriesByYear).sort((a, b) => Number(b) - Number(a));
+  
+  return sortedYears.map(year => (
+    <div key={year} className="mb-8">
+      <h3 className="text-xl font-semibold mb-3 flex items-center">
+        <Calendar className="h-5 w-5 mr-2" />
+        {year}
+      </h3>
+      
+      <div className="space-y-3">
+        {entriesByYear[year]
+          .sort((a: any, b: any) => a.order - b.order)
+          .map((entry: any) => (
+            <Card key={entry.id} className="overflow-hidden">
+              <CardHeader className="pb-2">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <CardTitle className="text-base">
+                      {entry.title}
+                    </CardTitle>
+                    {entry.type && (
+                      <CardDescription className="text-sm">
+                        {biographyTypes.find(t => t.value === entry.type)?.label || entry.type}
+                      </CardDescription>
+                    )}
+                  </div>
+                  <div className="flex items-center mt-1">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleEditEntry(entry)}
+                      className="h-8 w-8"
+                    >
+                      <Edit className="h-4 w-4" />
+                      <span className="sr-only">Edit</span>
+                    </Button>
+                    <ConfirmDialog
+                      title="Delete Entry"
+                      description={`Are you sure you want to delete "${entry.title}"? This action cannot be undone.`}
+                      onConfirm={() => deleteMutation.mutate(entry.id)}
+                      isPending={deleteMutation.isPending}
+                      trigger={
+                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                          <Trash2 className="h-4 w-4" />
+                          <span className="sr-only">Delete</span>
+                        </Button>
+                      }
+                    />
+                  </div>
+                </div>
+              </CardHeader>
+              {entry.description && (
+                <CardContent className="py-2">
+                  <p className="text-sm text-muted-foreground">
+                    {entry.description}
+                  </p>
+                </CardContent>
+              )}
+              <CardFooter className="pt-2 border-t flex justify-end text-xs text-muted-foreground">
+                <div className="flex items-center">
+                  <GripVertical className="h-3 w-3 mr-1" />
+                  Order: {entry.order || 0}
+                </div>
+              </CardFooter>
+            </Card>
+          ))}
+      </div>
+    </div>
+  ));
+}
+
 export default function AdminBiographyPage() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -341,80 +429,8 @@ export default function AdminBiographyPage() {
             <h3 className="text-lg font-medium">Timeline Entries</h3>
           </div>
           
-          {/* Group entries by year */}
-          {Object.entries(
-            biographyEntries.reduce((acc: any, entry: any) => {
-              const year = entry.year || "Unknown";
-              if (!acc[year]) acc[year] = [];
-              acc[year].push(entry);
-              return acc;
-            }, {})
-          )
-            .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
-            .map(([year, entries]: [string, any[]]) => (
-              <div key={year} className="mb-8">
-                <h3 className="text-xl font-semibold mb-3 flex items-center">
-                  <Calendar className="h-5 w-5 mr-2" />
-                  {year}
-                </h3>
-                
-                <div className="space-y-3">
-                  {entries
-                    .sort((a, b) => a.order - b.order)
-                    .map((entry: any) => (
-                      <Card key={entry.id} className="overflow-hidden">
-                        <CardHeader className="pb-2">
-                          <div className="flex items-start justify-between">
-                            <div>
-                              <CardTitle className="text-base">
-                                {entry.title}
-                              </CardTitle>
-                              {entry.type && (
-                                <CardDescription className="text-sm">
-                                  {biographyTypes.find(t => t.value === entry.type)?.label || entry.type}
-                                </CardDescription>
-                              )}
-                            </div>
-                            <div className="flex items-center mt-1">
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => handleEditEntry(entry)}
-                                className="h-8 w-8"
-                              >
-                                <Edit className="h-4 w-4" />
-                                <span className="sr-only">Edit</span>
-                              </Button>
-                              <ConfirmDialog
-                                title="Delete Entry"
-                                description={`Are you sure you want to delete "${entry.title}"? This action cannot be undone.`}
-                                onConfirm={() => deleteMutation.mutate(entry.id)}
-                                isPending={deleteMutation.isPending}
-                                triggerVariant="ghost"
-                                triggerSize="icon"
-                                iconOnly
-                              />
-                            </div>
-                          </div>
-                        </CardHeader>
-                        {entry.description && (
-                          <CardContent className="py-2">
-                            <p className="text-sm text-muted-foreground">
-                              {entry.description}
-                            </p>
-                          </CardContent>
-                        )}
-                        <CardFooter className="pt-2 border-t flex justify-end text-xs text-muted-foreground">
-                          <div className="flex items-center">
-                            <GripVertical className="h-3 w-3 mr-1" />
-                            Order: {entry.order || 0}
-                          </div>
-                        </CardFooter>
-                      </Card>
-                    ))}
-                </div>
-              </div>
-            ))}
+          {/* Group entries by year and render */}
+          {renderBiographyEntries(biographyEntries, biographyTypes, handleEditEntry, deleteMutation)}
         </div>
       )}
     </AdminSectionLayout>

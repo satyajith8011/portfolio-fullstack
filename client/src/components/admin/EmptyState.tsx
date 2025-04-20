@@ -22,12 +22,19 @@ export function EmptyState({ title, description, icon, action }: EmptyStateProps
         <h3 className="mt-4 text-lg font-semibold">{title}</h3>
         <p className="mb-4 mt-2 text-sm text-muted-foreground">{description}</p>
         {action && (
-          <Link href={action.href}>
-            <Button size="sm" className="relative">
+          action.href && action.href.length > 0 ? (
+            <Link href={action.href}>
+              <Button size="sm" className="relative">
+                <PlusCircle className="mr-2 h-4 w-4" />
+                {action.label}
+              </Button>
+            </Link>
+          ) : action.onClick ? (
+            <Button size="sm" className="relative" onClick={action.onClick}>
               <PlusCircle className="mr-2 h-4 w-4" />
               {action.label}
             </Button>
-          </Link>
+          ) : null
         )}
       </div>
     </div>
