@@ -135,7 +135,7 @@ const Projects = () => {
           animate={controls}
         >
           <a
-            href="#projects"
+            href="/projects"
             className="inline-flex items-center px-6 py-3 bg-gray-800 hover:bg-gray-900 text-white rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
           >
             View All Projects
