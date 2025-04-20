@@ -148,6 +148,13 @@ const Hero = () => {
               Satyajit Halder
             </motion.h1>
             
+            <motion.p
+              variants={itemVariants}
+              className="text-sm italic text-gray-500 mt-1"
+            >
+              "Not a born genius — just someone who refused to stop learning." 🌱
+            </motion.p>
+            
             <motion.div
               variants={itemVariants}
               className="relative"
@@ -168,8 +175,8 @@ const Hero = () => {
               className="text-gray-500 max-w-xl"
             >
               IT student and tech enthusiast with a passion for coding, gaming,
-              and creative exploration. I bring imagination to life through
-              technology.
+              and creative exploration. From average beginnings to ambitious dreams —
+              I bring imagination to life through technology.
             </motion.p>
             
             <motion.div

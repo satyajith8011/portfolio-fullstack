@@ -46,9 +46,11 @@ const Biography = () => {
             My Journey
           </h2>
           <p className="text-gray-500 max-w-2xl mx-auto">
-            Follow the path that has shaped who I am today - from student to tech
-            enthusiast.
+            From Average Beginnings to Ambitious Dreams — Follow the path that has shaped my story.
           </p>
+          <div className="mt-4 mx-auto max-w-2xl italic text-gray-600 text-sm">
+            "Not a born genius — just someone who refused to stop learning." 🌱
+          </div>
         </ScrollReveal>
 
         <div className="relative max-w-3xl mx-auto">

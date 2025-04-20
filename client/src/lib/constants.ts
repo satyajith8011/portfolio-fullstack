@@ -1,37 +1,37 @@
 export const timelineItems = [
   {
-    year: "2015",
-    title: "Montfort School, Guwahati",
+    year: "Till 2020",
+    title: "Humble Beginnings",
     description:
-      "Started my educational journey at Montfort School, where I developed a strong foundation and discovered my love for technology.",
+      "At Miranda Education Society, Bangalore, I wasn't the top of the class — just a curious, average student with a deep interest in how things work. While others raced for grades, I found myself drawn to computers, circuits, and the hidden logic behind everyday tech.",
     badgeColor: "primary",
   },
   {
-    year: "2018",
-    title: "First Coding Experience",
+    year: "2020-2023",
+    title: "Finding My Foundation",
     description:
-      "Wrote my first lines of code and became fascinated with programming. This sparked my journey into the world of software development.",
+      "Joined RJS Polytechnic, Bangalore, and completed my Diploma in Electronics & Communication Engineering. This was where I discovered that being 'average' never defined my potential. With each project and lab session, I built not just circuits — but confidence.",
     badgeColor: "secondary",
   },
   {
-    year: "2020",
-    title: "High School Graduation",
+    year: "2023",
+    title: "ECE Diploma Completion",
     description:
-      "Completed high school with honors and decided to pursue a degree in Information Technology to follow my passion.",
+      "Completed my Diploma in Electronics & Communication Engineering, having learned the beauty of logic, the rhythm of resistors, and the pulse of innovation. This is where my transformation truly began.",
     badgeColor: "accent",
   },
   {
-    year: "2021",
-    title: "First Tech Project",
+    year: "2023-2024",
+    title: "First Meaningful Projects",
     description:
-      "Developed my first significant project, which helped me understand the practical aspects of software development and problem-solving.",
+      "Developed my first significant projects including a Blockchain-Based Identity Verification System and a smart safety device for women. Started turning my passion into purpose through real-world applications.",
     badgeColor: "primary",
   },
   {
     year: "Present",
-    title: "IT Student & Tech Enthusiast",
+    title: "Building My Version of the Future",
     description:
-      "Currently pursuing my IT degree, working on exciting new projects, and continuously expanding my skills in blockchain, web development, and more.",
+      "Currently pursuing Information Technology at Parul University, Vadodara, Gujarat. Immersed in full-stack development, blockchain, and real-world tech solutions. From average marks to ambitious milestones — my journey isn't about where I began, but how far I'm willing to go.",
     badgeColor: "secondary",
   },
 ];
