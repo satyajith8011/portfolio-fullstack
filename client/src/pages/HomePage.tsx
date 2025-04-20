@@ -8,6 +8,10 @@ import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Skills from "@/components/Skills";
+import Achievements from "@/components/Achievements";
+import CurrentProjects from "@/components/CurrentProjects";
+import Testimonials from "@/components/Testimonials";
 
 const HomePage = () => {
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });

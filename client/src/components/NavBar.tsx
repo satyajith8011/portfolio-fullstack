@@ -80,8 +80,8 @@ const NavBar = () => {
           <div className="flex items-center space-x-4">
             {/* Resume Download Button */}
             <motion.a
-              href="/resume.pdf"
-              download="Satyajit_Halder_Resume.pdf"
+              href="/resume.txt"
+              download="Satyajit_Halder_Resume.txt"
               className="hidden md:flex items-center text-sm px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -161,8 +161,8 @@ const NavBar = () => {
                   Contact
                 </a>
                 <a
-                  href="/resume.pdf"
-                  download="Satyajit_Halder_Resume.pdf"
+                  href="/resume.txt"
+                  download="Satyajit_Halder_Resume.txt"
                   className="flex items-center py-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
                   onClick={closeMobileMenu}
                 >
