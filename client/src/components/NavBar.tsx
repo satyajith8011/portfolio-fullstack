@@ -1,19 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Download, ChevronDown, ChevronUp } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
 
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const toggleMobileMenu = () => {
@@ -22,6 +35,10 @@ const NavBar = () => {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
+  };
+  
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
@@ -58,47 +75,78 @@ const NavBar = () => {
               About Me
             </a>
             <a
-              href="#skills"
-              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-            >
-              Skills
-            </a>
-            <a
-              href="#projects"
-              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-            >
-              Projects
-            </a>
-            <a
-              href="#current-projects"
-              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-            >
-              Current Work
-            </a>
-            <a
-              href="#achievements"
-              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-            >
-              Achievements
-            </a>
-            <a
-              href="#testimonials"
-              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-            >
-              Testimonials
-            </a>
-            <a
-              href="#blog"
-              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-            >
-              Blog
-            </a>
-            <a
               href="#contact"
               className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Contact
             </a>
+            
+            {/* Dropdown Menu */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={toggleDropdown}
+                className="flex items-center text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors focus:outline-none"
+              >
+                More Sections
+                {isDropdownOpen ? (
+                  <ChevronUp className="ml-1 h-4 w-4" />
+                ) : (
+                  <ChevronDown className="ml-1 h-4 w-4" />
+                )}
+              </button>
+              
+              {isDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute z-50 mt-2 py-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-xl"
+                >
+                  <a
+                    href="#skills"
+                    className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Skills
+                  </a>
+                  <a
+                    href="#projects"
+                    className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Projects
+                  </a>
+                  <a
+                    href="#current-projects"
+                    className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Current Work
+                  </a>
+                  <a
+                    href="#achievements"
+                    className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Achievements
+                  </a>
+                  <a
+                    href="#testimonials"
+                    className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Testimonials
+                  </a>
+                  <a
+                    href="#blog"
+                    className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Blog
+                  </a>
+                </motion.div>
+              )}
+            </div>
           </div>
 
           <div className="flex items-center space-x-4">
@@ -106,11 +154,11 @@ const NavBar = () => {
             <motion.a
               href="/resume.txt"
               download="Satyajit_Halder_Resume.txt"
-              className="hidden md:flex items-center text-sm px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+              className="hidden md:flex items-center text-xs px-3 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Download size={16} className="mr-2" />
+              <Download size={14} className="mr-1.5" />
               Resume
             </motion.a>
 

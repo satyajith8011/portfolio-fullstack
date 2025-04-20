@@ -2,7 +2,7 @@ import { motion, useMotionValue, useTransform, useScroll, AnimatePresence } from
 import { useEffect, useRef, useState } from "react";
 import ProfileSVG from "../assets/profile.svg";
 import ProfileBgSVG from "../assets/profile-bg.svg";
-import { ArrowDown, Code, Coffee, Mouse } from "lucide-react";
+import { ArrowDown, Code, Coffee } from "lucide-react";
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -287,25 +287,7 @@ const Hero = () => {
           </motion.div>
         </div>
         
-        {/* Scroll down indicator */}
-        <motion.div 
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 0.7 }}
-        >
-          <p className="text-sm text-gray-500 mb-2">Scroll to explore</p>
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ 
-              duration: 1.5, 
-              repeat: Infinity, 
-              repeatType: "loop" 
-            }}
-          >
-            <Mouse className="h-6 w-6 text-blue-600" />
-          </motion.div>
-        </motion.div>
+
       </div>
 
       {/* Background animated elements */}

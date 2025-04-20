@@ -150,6 +150,24 @@
     background-color: theme('colors.gray.700');
   }
   
+  /* Improved dark mode text visibility */
+  .dark {
+    --text-opacity: 1;
+    color: rgba(229, 231, 235, var(--text-opacity));
+  }
+  
+  .dark .text-gray-600, 
+  .dark .text-gray-700, 
+  .dark .text-gray-800 {
+    --text-opacity: 1;
+    color: rgba(209, 213, 219, var(--text-opacity));
+  }
+  
+  .dark .text-gray-500 {
+    --text-opacity: 1;
+    color: rgba(156, 163, 175, var(--text-opacity));
+  }
+  
   /* Pulse animation for interactive elements */
   .pulse {
     position: relative;
