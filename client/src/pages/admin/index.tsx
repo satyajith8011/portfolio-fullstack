@@ -8,10 +8,20 @@ import {
   Eye, 
   Star, 
   ArrowUp, 
-  ArrowDown
+  ArrowDown,
+  User,
+  Clock,
+  Briefcase,
+  Phone,
+  Share2,
+  FileUp,
+  MessageSquareQuote,
+  Image,
+  LayoutGrid
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Link } from "wouter";
 
 export default function AdminDashboard() {
   // Fetch statistics data
@@ -98,11 +108,7 @@ export default function AdminDashboard() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat) => (
-            <a 
-              key={stat.title} 
-              href={stat.link}
-              className="block transition hover:scale-[1.02]"
-            >
+            <Link key={stat.title} href={stat.link} className="block transition hover:scale-[1.02]">
               <Card>
                 <CardContent className="p-6 flex justify-between items-center">
                   <div>
@@ -118,8 +124,218 @@ export default function AdminDashboard() {
                   </div>
                 </CardContent>
               </Card>
-            </a>
+            </Link>
           ))}
+        </div>
+        
+        {/* Admin sections grid */}
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Admin Sections</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* 1. Projects */}
+            <Link href="/admin/projects">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
+                      <Folder className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">Projects</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Manage your portfolio projects with tech stacks and GitHub links
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* 2. Blog Posts */}
+            <Link href="/admin/blogs">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-purple-100 p-3 rounded-full text-purple-600 mr-4">
+                      <FileText className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">Blog Posts</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Create, edit and publish blog content with rich text editing
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* 3. Achievements */}
+            <Link href="/admin/achievements">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-amber-100 p-3 rounded-full text-amber-600 mr-4">
+                      <Award className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">Achievements</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Showcase your certifications and awards in timeline format
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* 4. About Me */}
+            <Link href="/admin/about">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-green-100 p-3 rounded-full text-green-600 mr-4">
+                      <User className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">About Me</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Edit your personal bio, headline, and profile details
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* 5. Biography */}
+            <Link href="/admin/biography">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-indigo-100 p-3 rounded-full text-indigo-600 mr-4">
+                      <Clock className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">Biography</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Create a timeline of your educational and personal journey
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* 6. Skills */}
+            <Link href="/admin/skills">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-cyan-100 p-3 rounded-full text-cyan-600 mr-4">
+                      <Briefcase className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">Skills</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Manage technical and soft skills with categorization
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* 7. Current Work */}
+            <Link href="/admin/current-work">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-pink-100 p-3 rounded-full text-pink-600 mr-4">
+                      <LayoutGrid className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">Current Work</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Add ongoing projects and areas of learning focus
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* 8. Contact Details */}
+            <Link href="/admin/contact">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-orange-100 p-3 rounded-full text-orange-600 mr-4">
+                      <Phone className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">Contact Details</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Update your contact information and communication preferences
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* 9. Social Media */}
+            <Link href="/admin/social">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-violet-100 p-3 rounded-full text-violet-600 mr-4">
+                      <Share2 className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">Social Media</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Connect your professional profiles and social accounts
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* 10. Resume */}
+            <Link href="/admin/resume">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-rose-100 p-3 rounded-full text-rose-600 mr-4">
+                      <FileUp className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">Resume</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Upload and manage your latest resume/CV
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* 11. Testimonials */}
+            <Link href="/admin/testimonials">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-teal-100 p-3 rounded-full text-teal-600 mr-4">
+                      <MessageSquareQuote className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">Testimonials</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Add recommendations and feedback from colleagues
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* 12. Hero Section */}
+            <Link href="/admin/hero">
+              <Card className="hover:shadow-md transition duration-300 cursor-pointer h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="bg-emerald-100 p-3 rounded-full text-emerald-600 mr-4">
+                      <Image className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-lg font-medium">Hero Section</h3>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    Customize the main landing section with your profile image and title
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
         </div>
           
         {/* Content row */}
@@ -130,9 +346,9 @@ export default function AdminDashboard() {
               <CardTitle className="flex items-center justify-between">
                 <span>Featured Projects</span>
                 <span className="text-sm font-normal text-blue-600">
-                  <a href="/admin/projects" className="flex items-center hover:underline">
+                  <Link href="/admin/projects" className="flex items-center hover:underline">
                     View All <Eye className="ml-1 h-4 w-4" />
-                  </a>
+                  </Link>
                 </span>
               </CardTitle>
               <CardDescription>Manage and update your highlighted projects</CardDescription>
@@ -181,9 +397,9 @@ export default function AdminDashboard() {
               <CardTitle className="flex items-center justify-between">
                 <span>Blog Posts Status</span>
                 <span className="text-sm font-normal text-blue-600">
-                  <a href="/admin/blog" className="flex items-center hover:underline">
+                  <Link href="/admin/blogs" className="flex items-center hover:underline">
                     Manage <Eye className="ml-1 h-4 w-4" />
-                  </a>
+                  </Link>
                 </span>
               </CardTitle>
               <CardDescription>Overview of published and draft posts</CardDescription>
@@ -254,9 +470,9 @@ export default function AdminDashboard() {
             <CardTitle className="flex items-center justify-between">
               <span>Recent Messages</span>
               <span className="text-sm font-normal text-blue-600">
-                <a href="/admin/messages" className="flex items-center hover:underline">
+                <Link href="/admin/messages" className="flex items-center hover:underline">
                   View All <Eye className="ml-1 h-4 w-4" />
-                </a>
+                </Link>
               </span>
             </CardTitle>
             <CardDescription>Latest contact form submissions</CardDescription>
