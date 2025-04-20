@@ -30,6 +30,9 @@ import AdminAchievementNewPage from "@/pages/admin/achievements/new";
 import AdminAchievementEditPage from "@/pages/admin/achievements/[id]";
 import AdminMessagesPage from "@/pages/admin/messages";
 import AdminBiographyPage from "@/pages/admin/biography";
+import AdminContactPage from "@/pages/admin/contact";
+import AdminSocialPage from "@/pages/admin/social";
+import AdminTestimonialsPage from "@/pages/admin/testimonials";
 
 // Lazy load admin pages to reduce initial bundle size
 import { lazy, Suspense } from "react";
@@ -82,31 +85,27 @@ function Router() {
       
       {/* Biography Section */}
       <ProtectedRoute path="/admin/biography" component={AdminBiographyPage} adminOnly />
+      
+      {/* Current Work Section */}
       <ProtectedRoute path="/admin/current-work" component={() => (
         <Suspense fallback={<Loading />}>
           <AdminDashboard />
         </Suspense>
       )} adminOnly />
-      <ProtectedRoute path="/admin/contact" component={() => (
-        <Suspense fallback={<Loading />}>
-          <AdminDashboard />
-        </Suspense>
-      )} adminOnly />
-      <ProtectedRoute path="/admin/social" component={() => (
-        <Suspense fallback={<Loading />}>
-          <AdminDashboard />
-        </Suspense>
-      )} adminOnly />
+      
+      {/* Contact Section */}
+      <ProtectedRoute path="/admin/contact" component={AdminContactPage} adminOnly />
+      
+      {/* Social Media Section */}
+      <ProtectedRoute path="/admin/social" component={AdminSocialPage} adminOnly />
       <ProtectedRoute path="/admin/resume" component={() => (
         <Suspense fallback={<Loading />}>
           <AdminDashboard />
         </Suspense>
       )} adminOnly />
-      <ProtectedRoute path="/admin/testimonials" component={() => (
-        <Suspense fallback={<Loading />}>
-          <AdminDashboard />
-        </Suspense>
-      )} adminOnly />
+      
+      {/* Testimonials Section */}
+      <ProtectedRoute path="/admin/testimonials" component={AdminTestimonialsPage} adminOnly />
       <ProtectedRoute path="/admin/hero" component={() => (
         <Suspense fallback={<Loading />}>
           <AdminDashboard />
