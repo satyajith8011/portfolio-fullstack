@@ -89,9 +89,21 @@ const Hero = () => {
     "Transforming Challenges into Opportunities"
   ];
   
-  // State to manage the current tagline and animation state
+  // Creative titles/roles that will rotate with name
+  const creativeTitles = [
+    "Full Stack Developer",
+    "UI/UX Enthusiast",
+    "Problem Solver",
+    "Digital Craftsman",
+    "Tech Explorer",
+    "Code Artisan"
+  ];
+  
+  // State to manage animation states
   const [currentTaglineIndex, setCurrentTaglineIndex] = useState(0);
   const [isTaglineAnimating, setIsTaglineAnimating] = useState(false);
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  const [isTitleAnimating, setIsTitleAnimating] = useState(false);
   
   // Cycle through taglines with animation
   useEffect(() => {
@@ -113,6 +125,28 @@ const Hero = () => {
     }, 5000); // Change every 5 seconds
     
     return () => clearInterval(taglineInterval);
+  }, []);
+  
+  // Cycle through creative titles
+  useEffect(() => {
+    const titleInterval = setInterval(() => {
+      setIsTitleAnimating(true);
+      
+      // Wait for exit animation, then change title
+      setTimeout(() => {
+        setCurrentTitleIndex((prevIndex) => 
+          prevIndex === creativeTitles.length - 1 ? 0 : prevIndex + 1
+        );
+        
+        // Start entrance animation
+        setTimeout(() => {
+          setIsTitleAnimating(false);
+        }, 300);
+      }, 500);
+      
+    }, 4000); // Change every 4 seconds (different from taglines for better visual effect)
+    
+    return () => clearInterval(titleInterval);
   }, []);
 
   return (
@@ -177,12 +211,53 @@ const Hero = () => {
               Hello, I'm
             </motion.p>
             
-            <motion.h1
-              variants={itemVariants}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 font-['Space_Grotesk'] leading-tight"
-            >
-              Satyajit Halder
-            </motion.h1>
+            <motion.div className="relative overflow-hidden">
+              <motion.h1
+                variants={itemVariants}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 font-['Space_Grotesk'] leading-tight"
+              >
+                <span className="inline-block">Satyajit</span>{" "}
+                <span className="inline-block relative">
+                  <span className="relative z-10 inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">Halder</span>
+                  <motion.span 
+                    className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    transition={{ delay: 1, duration: 0.8 }}
+                  />
+                </span>
+              </motion.h1>
+              
+              <div className="h-8 mt-2 overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentTitleIndex}
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ 
+                      y: isTitleAnimating ? -30 : 0, 
+                      opacity: isTitleAnimating ? 0 : 1 
+                    }}
+                    exit={{ y: -30, opacity: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="text-lg md:text-xl text-blue-600 font-medium flex items-center"
+                  >
+                    <span className="text-blue-600 mr-2">〈</span>
+                    {creativeTitles[currentTitleIndex].split('').map((letter, i) => (
+                      <motion.span
+                        key={i}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.03 + 0.3 }}
+                        className="inline-block relative"
+                      >
+                        {letter}
+                      </motion.span>
+                    ))}
+                    <span className="text-blue-600 ml-2">〉</span>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
             
             <motion.p
               variants={itemVariants}
