@@ -172,22 +172,23 @@ export const blogPosts = [
 ];
 
 export const contactInfo = {
-  email: "contact@satyajithalder.com",
-  location: "Guwahati, Assam, India",
+  email: "satyajith500@gmail.com",
+  phone: "+91 90357 93685",
+  location: "Bangalore, Karnataka, India",
   socialLinks: [
     {
       platform: "LinkedIn",
-      url: "#",
+      url: "https://www.linkedin.com/in/satyajith-halder-6423a822a/",
       icon: "Linkedin",
     },
     {
       platform: "Instagram",
-      url: "#",
+      url: "https://www.instagram.com/satyajith05/?hl=en",
       icon: "Instagram",
     },
     {
       platform: "GitHub",
-      url: "#",
+      url: "https://github.com/satyajith8011",
       icon: "Github",
     },
   ],
