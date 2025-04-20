@@ -2,6 +2,7 @@ import { motion, useMotionValue, useTransform, useScroll, AnimatePresence } from
 import { useEffect, useRef, useState } from "react";
 import ProfileSVG from "../assets/profile.svg";
 import ProfileBgSVG from "../assets/profile-bg.svg";
+import ProfilePhoto from "../assets/img/profile-photo.jpg";
 import { ArrowDown, Code, Coffee } from "lucide-react";
 
 const Hero = () => {
@@ -289,7 +290,7 @@ const Hero = () => {
               className="relative w-64 h-64 md:w-80 md:h-80"
               style={{ y: useTransform(scrollY, [0, 300], [0, -50]) }}
             >
-              {/* Profile background with animation */}
+              {/* Photo container with frame effect */}
               <motion.div
                 animate={{ 
                   rotate: [0, 5, 0, -5, 0], 
@@ -300,16 +301,20 @@ const Hero = () => {
                   repeat: Infinity,
                   repeatType: "loop" 
                 }}
+                className="w-full h-full rounded-full relative border-8 border-white shadow-xl overflow-hidden"
+                style={{ 
+                  background: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)",
+                  padding: "4px"
+                }}
               >
-                <img src={ProfileBgSVG} alt="" className="w-full h-full" />
+                {/* Profile image */}
+                <img 
+                  src={ProfilePhoto} 
+                  alt="Satyajit Halder" 
+                  className="w-full h-full object-cover rounded-full"
+                  style={{ objectPosition: "center top" }}
+                />
               </motion.div>
-              
-              {/* Profile image */}
-              <img 
-                src={ProfileSVG} 
-                alt="Satyajit Halder" 
-                className="absolute inset-0 w-full h-full"
-              />
               
               {/* Floating technology symbols */}
               <motion.div
