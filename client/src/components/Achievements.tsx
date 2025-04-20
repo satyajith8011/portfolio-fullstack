@@ -129,6 +129,33 @@ const Achievements = () => {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          className="mt-12 text-center"
+          variants={sectionVariants}
+          initial="hidden"
+          animate={controls}
+        >
+          <a
+            href="/achievements"
+            className="inline-flex items-center px-6 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-500 text-gray-800 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg shadow-md hover:shadow-lg transition-all"
+          >
+            View All Achievements
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 ml-2"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </motion.div>
       </div>
     </section>
   );
