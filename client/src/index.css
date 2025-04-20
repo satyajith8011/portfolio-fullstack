@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    
+    --primary: 222 47% 11%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 162 75% 40%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --accent: 330 81% 60%;
+    --accent-foreground: 210 40% 98%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222 47% 11%;
+    
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 11%;
+    
+    --secondary: 162 75% 40%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --accent: 330 81% 60%;
+    --accent-foreground: 222 47% 11%;
+    
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+    
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .gradient-bg {
+    background-image: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.05));
+  }
+  
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: theme('colors.primary.600');
+    left: -8px;
+    top: 24px;
+  }
+
+  .timeline-line {
+    position: absolute;
+    width: 2px;
+    background-color: theme('colors.gray.300');
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-item::before {
+      left: -7px;
+    }
+  }
+
+  .skill-tag {
+    transition: all 0.3s ease;
+  }
+
+  .skill-tag:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .section-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .section-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
