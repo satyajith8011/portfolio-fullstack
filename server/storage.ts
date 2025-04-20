@@ -475,7 +475,7 @@ export class DatabaseStorage implements IStorage {
     return await db
       .select()
       .from(socialLinks)
-      .orderBy(asc(socialLinks.displayOrder));
+      .orderBy(socialLinks.id);
   }
 
   async createSocialLink(link: InsertSocialLink): Promise<SocialLink> {
@@ -553,7 +553,7 @@ export class DatabaseStorage implements IStorage {
     return await db
       .select()
       .from(testimonials)
-      .orderBy(desc(testimonials.createdAt));
+      .orderBy(testimonials.id);
   }
 
   async createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial> {
@@ -620,7 +620,7 @@ export class DatabaseStorage implements IStorage {
     return await db
       .select()
       .from(currentFocus)
-      .orderBy(asc(currentFocus.displayOrder));
+      .orderBy(currentFocus.priority);
   }
 
   async createCurrentFocus(focus: InsertCurrentFocus): Promise<CurrentFocus> {
@@ -726,7 +726,7 @@ export class DatabaseStorage implements IStorage {
     return await db
       .select()
       .from(biographyEntries)
-      .orderBy(desc(biographyEntries.date));
+      .orderBy(biographyEntries.year);
   }
 
   async createBiographyEntry(entry: InsertBiographyEntry): Promise<BiographyEntry> {
@@ -761,7 +761,7 @@ export class DatabaseStorage implements IStorage {
     return await db
       .select()
       .from(skills)
-      .orderBy(asc(skills.category), asc(skills.name));
+      .orderBy(skills.category, skills.name);
   }
 
   async createSkill(skill: InsertSkill): Promise<Skill> {
