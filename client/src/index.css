@@ -87,6 +87,12 @@
     animation: gradient-shift 15s ease infinite;
   }
   
+  .dark .hero-gradient-bg {
+    background: linear-gradient(135deg, #192231 0%, #253045 100%);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+  
   @keyframes gradient-shift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -138,6 +144,10 @@
     left: 0;
     top: 0;
     bottom: 0;
+  }
+  
+  .dark .timeline-line {
+    background-color: theme('colors.gray.700');
   }
   
   /* Pulse animation for interactive elements */
