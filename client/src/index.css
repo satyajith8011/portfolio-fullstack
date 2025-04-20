@@ -126,7 +126,7 @@
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background-color: theme('colors.primary.600');
+    background-color: hsl(var(--primary));
     left: -8px;
     top: 24px;
   }
