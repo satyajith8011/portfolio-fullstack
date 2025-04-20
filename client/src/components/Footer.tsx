@@ -1,11 +1,12 @@
 import { contactInfo } from "@/lib/constants";
 import { Github, Instagram, Linkedin, Code, ExternalLink, Mail, MapPin, Cpu, MousePointer } from "lucide-react";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Footer = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [cursorVariant, setCursorVariant] = useState("default");
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+  const [fadeIn, setFadeIn] = useState(true);
   
   // Track the position for the interactive gradient
   useEffect(() => {
@@ -31,6 +32,26 @@ const Footer = () => {
     };
   }, []);
 
+  // Rotate through quotes with fade transition
+  useEffect(() => {
+    const quoteInterval = setInterval(() => {
+      // Start fade out
+      setFadeIn(false);
+      
+      // Wait for fade out then change quote
+      setTimeout(() => {
+        setCurrentQuoteIndex(prevIndex => 
+          prevIndex === footerQuotes.length - 1 ? 0 : prevIndex + 1
+        );
+        // Trigger fade in
+        setFadeIn(true);
+      }, 1000); // Time to fade out
+      
+    }, 6000); // Time between quote changes (includes fade time)
+    
+    return () => clearInterval(quoteInterval);
+  }, []);
+
   const getSocialIcon = (iconName: string) => {
     switch (iconName) {
       case "Linkedin":
@@ -51,7 +72,7 @@ const Footer = () => {
     "Not a born genius — just someone who refused to stop learning."
   ];
 
-  const randomQuote = footerQuotes[Math.floor(Math.random() * footerQuotes.length)];
+  const currentQuote = footerQuotes[currentQuoteIndex];
 
   // Animation for the footer wave
   const waveVariants = {
@@ -111,11 +132,11 @@ const Footer = () => {
         {[...Array(15)].map((_, i) => (
           <div 
             key={i} 
-            className="absolute text-sm font-mono text-blue-400/50"
+            className="absolute text-sm font-mono text-blue-400/50 binary-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animation: `float ${5 + Math.random() * 10}s linear infinite`,
+              animationDuration: `${5 + Math.random() * 10}s`,
               animationDelay: `${Math.random() * 5}s`
             }}
           >
@@ -133,8 +154,12 @@ const Footer = () => {
             transition={{ duration: 0.7 }}
             className="bg-gradient-to-r from-blue-500 to-purple-500 p-[1px] rounded-lg max-w-3xl mx-auto"
           >
-            <div className="bg-gray-900/90 backdrop-blur-sm rounded-lg p-6">
-              <p className="text-lg md:text-xl italic text-gray-100 font-light">"{randomQuote}"</p>
+            <div className="bg-gray-900/90 backdrop-blur-sm rounded-lg p-6 min-h-[80px] flex items-center justify-center">
+              <p 
+                className={`text-lg md:text-xl italic text-gray-100 font-light transition-opacity duration-1000 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}
+              >
+                "{currentQuote}"
+              </p>
             </div>
           </motion.div>
         </div>
@@ -270,26 +295,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-
-      {/* CSS for the floating binary animation */}
-      <style jsx="true">{`
-        @keyframes float {
-          0% {
-            transform: translateY(0);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(-700px);
-            opacity: 0;
-          }
-        }
-      `}</style>
     </footer>
   );
 };

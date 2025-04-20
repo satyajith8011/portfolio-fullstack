@@ -245,6 +245,28 @@
     100% { transform: translateY(0px); }
   }
   
+  /* Binary code float animation */
+  .binary-float {
+    animation: binary-float 15s linear infinite;
+  }
+  
+  @keyframes binary-float {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-700px);
+      opacity: 0;
+    }
+  }
+  
   /* Section fade animations */
   .section-fade {
     opacity: 0;
