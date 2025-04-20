@@ -23,7 +23,6 @@ import {
   FileUp,
   CheckCircle,
   Eye,
-  FilePdf,
   FileX,
   File
 } from "lucide-react";
@@ -259,7 +258,7 @@ export default function AdminResumePage() {
               {resumeUrl && displayOption === "file" ? (
                 <div className="space-y-4">
                   <div className="flex items-center p-4 bg-muted rounded-lg">
-                    <FilePdf className="h-10 w-10 text-primary mr-4" />
+                    <FileText className="h-10 w-10 text-primary mr-4" />
                     <div className="flex-grow">
                       <h3 className="font-medium mb-1">
                         {getFileName(resumeUrl)}

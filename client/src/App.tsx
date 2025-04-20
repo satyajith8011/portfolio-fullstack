@@ -35,6 +35,7 @@ import AdminSocialPage from "@/pages/admin/social";
 import AdminTestimonialsPage from "@/pages/admin/testimonials";
 import AdminHeroPage from "@/pages/admin/hero";
 import AdminCurrentWorkPage from "@/pages/admin/current-work";
+import AdminResumePage from "@/pages/admin/resume";
 
 // Lazy load admin pages to reduce initial bundle size
 import { lazy, Suspense } from "react";
@@ -96,11 +97,9 @@ function Router() {
       
       {/* Social Media Section */}
       <ProtectedRoute path="/admin/social" component={AdminSocialPage} adminOnly />
-      <ProtectedRoute path="/admin/resume" component={() => (
-        <Suspense fallback={<Loading />}>
-          <AdminDashboard />
-        </Suspense>
-      )} adminOnly />
+      
+      {/* Resume Section */}
+      <ProtectedRoute path="/admin/resume" component={AdminResumePage} adminOnly />
       
       {/* Testimonials Section */}
       <ProtectedRoute path="/admin/testimonials" component={AdminTestimonialsPage} adminOnly />
