@@ -38,7 +38,7 @@ const NavBar = () => {
             <span className="text-gray-900 dark:text-gray-100">Satyajit</span> <span className="dark:text-gray-300">Halder</span>
           </a>
 
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             <a
               href="#home"
               className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
@@ -58,10 +58,22 @@ const NavBar = () => {
               About Me
             </a>
             <a
+              href="#skills"
+              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+            >
+              Skills
+            </a>
+            <a
               href="#projects"
               className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Projects
+            </a>
+            <a
+              href="#achievements"
+              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+            >
+              Achievements
             </a>
             <a
               href="#blog"

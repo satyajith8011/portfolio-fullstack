@@ -1,7 +1,7 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
-import { Award, Certificate, Trophy, Star } from "lucide-react";
+import { Award, BookOpen, Trophy, Star } from "lucide-react";
 
 // Achievement data
 const achievements = [
@@ -13,7 +13,7 @@ const achievements = [
     type: "award",
   },
   {
-    icon: <Certificate className="h-6 w-6 text-blue-600 dark:text-blue-500" />,
+    icon: <BookOpen className="h-6 w-6 text-blue-600 dark:text-blue-500" />,
     title: "Full-Stack Web Development",
     description: "Earned certification in modern web development technologies and best practices.",
     year: "2022",

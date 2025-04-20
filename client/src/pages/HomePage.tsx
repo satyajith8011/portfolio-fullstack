@@ -122,7 +122,11 @@ const HomePage = () => {
           <Hero />
           <Biography />
           <AboutMe />
+          <Skills />
           <Projects />
+          <CurrentProjects />
+          <Achievements />
+          <Testimonials />
           <Blog />
           <Contact />
         </main>
