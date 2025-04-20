@@ -14,6 +14,18 @@ import AllAchievements from "@/pages/AllAchievements";
 import AuthPage from "@/pages/auth-page";
 import AdminDashboard from "@/pages/admin";
 
+// Import admin pages
+import AdminAboutPage from "@/pages/admin/about";
+import AdminSkillsPage from "@/pages/admin/skills";
+import AdminSkillNewPage from "@/pages/admin/skills/new";
+import AdminSkillEditPage from "@/pages/admin/skills/[id]";
+import AdminProjectsPage from "@/pages/admin/projects";
+import AdminProjectNewPage from "@/pages/admin/projects/new";
+import AdminProjectEditPage from "@/pages/admin/projects/[id]";
+import AdminBlogsPage from "@/pages/admin/blogs";
+import AdminBlogNewPage from "@/pages/admin/blogs/new";
+import AdminBlogEditPage from "@/pages/admin/blogs/[id]";
+
 // Lazy load admin pages to reduce initial bundle size
 import { lazy, Suspense } from "react";
 import { Loader2 } from "lucide-react";
@@ -34,29 +46,69 @@ function Router() {
       <Route path="/achievements" component={AllAchievements} />
       <Route path="/auth" component={AuthPage} />
       
-      {/* Admin Routes - Protected */}
+      {/* Admin Dashboard */}
       <ProtectedRoute path="/admin" component={AdminDashboard} adminOnly />
-      <ProtectedRoute path="/admin/projects" component={() => (
-        <Suspense fallback={<Loading />}>
-          <AdminDashboard />
-        </Suspense>
-      )} adminOnly />
-      <ProtectedRoute path="/admin/blog" component={() => (
-        <Suspense fallback={<Loading />}>
-          <AdminDashboard />
-        </Suspense>
-      )} adminOnly />
+      
+      {/* About Me Section */}
+      <ProtectedRoute path="/admin/about" component={AdminAboutPage} adminOnly />
+      
+      {/* Skills Section */}
+      <ProtectedRoute path="/admin/skills" component={AdminSkillsPage} adminOnly />
+      <ProtectedRoute path="/admin/skills/new" component={AdminSkillNewPage} adminOnly />
+      <ProtectedRoute path="/admin/skills/:id" component={AdminSkillEditPage} adminOnly />
+      
+      {/* Projects Section */}
+      <ProtectedRoute path="/admin/projects" component={AdminProjectsPage} adminOnly />
+      <ProtectedRoute path="/admin/projects/new" component={AdminProjectNewPage} adminOnly />
+      <ProtectedRoute path="/admin/projects/:id" component={AdminProjectEditPage} adminOnly />
+      
+      {/* Blog Posts Section */}
+      <ProtectedRoute path="/admin/blogs" component={AdminBlogsPage} adminOnly />
+      <ProtectedRoute path="/admin/blogs/new" component={AdminBlogNewPage} adminOnly />
+      <ProtectedRoute path="/admin/blogs/:id" component={AdminBlogEditPage} adminOnly />
+      
+      {/* Other Admin Routes - Temporary */}
       <ProtectedRoute path="/admin/achievements" component={() => (
         <Suspense fallback={<Loading />}>
           <AdminDashboard />
         </Suspense>
       )} adminOnly />
-      <ProtectedRoute path="/admin/messages" component={() => (
+      <ProtectedRoute path="/admin/biography" component={() => (
         <Suspense fallback={<Loading />}>
           <AdminDashboard />
         </Suspense>
       )} adminOnly />
-      <ProtectedRoute path="/admin/settings" component={() => (
+      <ProtectedRoute path="/admin/current-work" component={() => (
+        <Suspense fallback={<Loading />}>
+          <AdminDashboard />
+        </Suspense>
+      )} adminOnly />
+      <ProtectedRoute path="/admin/contact" component={() => (
+        <Suspense fallback={<Loading />}>
+          <AdminDashboard />
+        </Suspense>
+      )} adminOnly />
+      <ProtectedRoute path="/admin/social" component={() => (
+        <Suspense fallback={<Loading />}>
+          <AdminDashboard />
+        </Suspense>
+      )} adminOnly />
+      <ProtectedRoute path="/admin/resume" component={() => (
+        <Suspense fallback={<Loading />}>
+          <AdminDashboard />
+        </Suspense>
+      )} adminOnly />
+      <ProtectedRoute path="/admin/testimonials" component={() => (
+        <Suspense fallback={<Loading />}>
+          <AdminDashboard />
+        </Suspense>
+      )} adminOnly />
+      <ProtectedRoute path="/admin/hero" component={() => (
+        <Suspense fallback={<Loading />}>
+          <AdminDashboard />
+        </Suspense>
+      )} adminOnly />
+      <ProtectedRoute path="/admin/messages" component={() => (
         <Suspense fallback={<Loading />}>
           <AdminDashboard />
         </Suspense>
