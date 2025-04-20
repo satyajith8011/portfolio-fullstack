@@ -381,4 +381,114 @@
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
+  
+  /* Creative photo frame styling */
+  .photo-frame-outer {
+    position: relative;
+    overflow: visible;
+  }
+  
+  .photo-frame-inner {
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+  }
+  
+  .photo-frame-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 15;
+    background: linear-gradient(
+      45deg,
+      rgba(59, 130, 246, 0) 40%,
+      rgba(59, 130, 246, 0.3) 43%, 
+      rgba(139, 92, 246, 0.4) 45%,
+      rgba(59, 130, 246, 0.3) 47%,
+      rgba(59, 130, 246, 0) 50%
+    );
+    animation: shine 5s infinite linear;
+    pointer-events: none;
+  }
+  
+  .photo-frame-outer::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      #3b82f6,
+      #8b5cf6,
+      #ec4899,
+      #f59e0b,
+      #10b981,
+      #3b82f6
+    );
+    filter: blur(10px);
+    opacity: 0.5;
+    z-index: -1;
+    animation: rotate 10s infinite linear;
+  }
+  
+  .particles {
+    position: absolute;
+    inset: -20px;
+    z-index: -1;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: particleFloat 8s infinite linear;
+  }
+  
+  @keyframes shine {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes particleFloat {
+    0% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-300px) translateX(100px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 }

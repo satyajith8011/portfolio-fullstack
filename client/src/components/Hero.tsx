@@ -290,30 +290,73 @@ const Hero = () => {
               className="relative w-64 h-64 md:w-80 md:h-80"
               style={{ y: useTransform(scrollY, [0, 300], [0, -50]) }}
             >
-              {/* Photo container with frame effect */}
+              {/* Creative photo container with advanced effects */}
               <motion.div
                 animate={{ 
-                  rotate: [0, 5, 0, -5, 0], 
-                  scale: [1, 1.05, 1, 1.05, 1] 
+                  rotate: [0, 2, 0, -2, 0], 
+                  scale: [1, 1.02, 1, 1.02, 1] 
                 }}
                 transition={{ 
-                  duration: 20, 
+                  duration: 8, 
                   repeat: Infinity,
                   repeatType: "loop" 
                 }}
-                className="w-full h-full rounded-full relative border-8 border-white shadow-xl overflow-hidden"
-                style={{ 
-                  background: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)",
-                  padding: "4px"
-                }}
+                className="photo-frame-outer w-full h-full relative"
               >
-                {/* Profile image */}
-                <img 
-                  src={ProfilePhoto} 
-                  alt="Satyajit Halder" 
-                  className="w-full h-full object-cover rounded-full"
-                  style={{ objectPosition: "center top" }}
-                />
+                {/* Rainbow colored particles */}
+                <div className="particles">
+                  {[...Array(12)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="particle"
+                      style={{
+                        top: `${Math.random() * 100}%`,
+                        left: `${Math.random() * 100}%`,
+                        backgroundColor: 
+                          i % 5 === 0 ? "#3b82f6" : 
+                          i % 5 === 1 ? "#8b5cf6" : 
+                          i % 5 === 2 ? "#ec4899" : 
+                          i % 5 === 3 ? "#f59e0b" : 
+                          "#10b981",
+                        animationDelay: `${Math.random() * 2}s`,
+                        animationDuration: `${5 + Math.random() * 5}s`
+                      }}
+                    />
+                  ))}
+                </div>
+                
+                {/* Main photo frame with shine effect */}
+                <motion.div 
+                  className="photo-frame-inner w-full h-full rounded-full border-4 border-white shadow-xl overflow-hidden bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500"
+                  style={{ 
+                    backgroundSize: "200% 200%",
+                    animation: "gradient-animation 5s ease infinite"
+                  }}
+                >
+                  {/* Profile image with mask filter */}
+                  <img 
+                    src={ProfilePhoto} 
+                    alt="Satyajit Halder" 
+                    className="w-full h-full object-cover rounded-full"
+                    style={{ 
+                      objectPosition: "center top",
+                      filter: "saturate(1.15) contrast(1.1)"
+                    }}
+                  />
+                  
+                  {/* Overlay glow effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 via-transparent to-purple-500/20 rounded-full"
+                    animate={{
+                      opacity: [0.3, 0.6, 0.3]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      repeatType: "reverse"
+                    }}
+                  />
+                </motion.div>
               </motion.div>
               
               {/* Floating technology symbols */}
