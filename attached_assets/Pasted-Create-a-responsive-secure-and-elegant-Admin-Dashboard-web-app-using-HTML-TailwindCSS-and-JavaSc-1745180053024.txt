@@ -1,0 +1,65 @@
+Create a responsive, secure, and elegant Admin Dashboard web app using HTML, TailwindCSS, and JavaScript (React optional) for Satyajit Halder’s personal portfolio website.
+
+🔐 Admin Login Page:
+- Username: admin
+- Password: bootstrapsatya2025
+- Basic login with localStorage to simulate session
+- Redirect to dashboard after successful login
+
+🧩 Dashboard Sections with Full CRUD:
+1. **Projects**
+   - Add, Edit, Delete project cards
+   - Fields: Title, Description, Tech Stack, GitHub Link, Live Link, Image
+
+2. **Blogs**
+   - Add, Edit, Delete blog posts
+   - Fields: Title, Short Summary, Full Content (Rich Text), Tags, Date
+
+3. **Achievements**
+   - Manage achievements as timeline or list
+   - Fields: Title, Description, Year, Tags (e.g., Project, Award)
+
+4. **About Me**
+   - Edit full paragraph or short intro
+   - Upload profile photo for hero section
+   - Fields: Headline, Description, Quote
+
+5. **Biography (Timeline Style)**
+   - Create/Update educational and personal journey with year-by-year entries
+
+6. **Skills**
+   - Add/Edit/Delete categorized skills
+   - Categories: Frontend, Backend, Tools, DB, Blockchain, Soft Skills
+
+7. **Current Work / Learning**
+   - Tag-style interface for managing ongoing technologies or focus areas
+
+8. **Contact Details**
+   - Editable fields: Email, Phone, Location, LinkedIn, GitHub, WhatsApp
+
+9. **Social Media**
+   - Add/Edit/Delete social links (icon + link)
+
+10. **Resume**
+   - Upload and update resume file (PDF or external link)
+
+11. **Testimonials**
+   - Add, Edit, Delete testimonials
+   - Fields: Name, Role, Photo, Feedback
+
+12. **Hero Section**
+   - Upload/change profile image
+   - Edit title (e.g., “Hello, I'm Satyajit Halder”)
+   - Edit subtitle/quote/tagline
+
+🎨 UI Instructions:
+- Sidebar navigation with icons
+- Use TailwindCSS for clean and responsive design
+- Dark mode toggle
+- Mobile-first layout
+- Toast notifications for actions (saved, updated, deleted)
+- Use modals or collapsible forms for Add/Edit actions
+
+📦 Data Handling:
+- Use localStorage or JSON-based mock API for data handling
+- Optional: Create import/export button for data backups

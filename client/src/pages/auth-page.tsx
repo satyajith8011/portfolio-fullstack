@@ -12,10 +12,10 @@ export default function AuthPage() {
   const { user, loginMutation, registerMutation } = useAuth();
   const [, setLocation] = useLocation();
   
-  // Form states
+  // Form states with default admin credentials for this portfolio
   const [loginData, setLoginData] = useState({
-    username: "",
-    password: "",
+    username: "admin",
+    password: "bootstrapsatya2025",
   });
   
   const [registerData, setRegisterData] = useState({

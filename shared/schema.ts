@@ -10,6 +10,11 @@ export const users = pgTable("users", {
   email: text("email"),
   fullName: text("full_name"),
   role: text("role").default("user").notNull(), // 'admin' or 'user'
+  bio: text("bio"),
+  profilePhoto: text("profile_photo"),
+  headline: text("headline"),
+  quote: text("quote"),
+  resumeUrl: text("resume_url"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -19,6 +24,134 @@ export const insertUserSchema = createInsertSchema(users).pick({
   email: true,
   fullName: true,
   role: true,
+  bio: true,
+  profilePhoto: true,
+  headline: true,
+  quote: true,
+  resumeUrl: true,
+});
+
+// Biography Timeline
+export const biographyEntries = pgTable("biography_entries", {
+  id: serial("id").primaryKey(),
+  year: integer("year").notNull(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  type: text("type").notNull(), // 'education', 'work', 'personal', etc.
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertBiographyEntrySchema = createInsertSchema(biographyEntries).pick({
+  year: true,
+  title: true,
+  description: true,
+  type: true,
+});
+
+// Skills
+export const skills = pgTable("skills", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  category: text("category").notNull(), // 'frontend', 'backend', 'tools', 'db', 'blockchain', 'soft'
+  icon: text("icon"),
+  proficiency: integer("proficiency"), // 1-5 rating
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertSkillSchema = createInsertSchema(skills).pick({
+  name: true,
+  category: true,
+  icon: true,
+  proficiency: true,
+});
+
+// Current Work/Learning
+export const currentFocus = pgTable("current_focus", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description"),
+  type: text("type").notNull(), // 'learning', 'working'
+  priority: integer("priority"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertCurrentFocusSchema = createInsertSchema(currentFocus).pick({
+  title: true,
+  description: true,
+  type: true,
+  priority: true,
+});
+
+// Social Media Links
+export const socialLinks = pgTable("social_links", {
+  id: serial("id").primaryKey(),
+  platform: text("platform").notNull(),
+  url: text("url").notNull(),
+  icon: text("icon"),
+  displayOrder: integer("display_order"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertSocialLinkSchema = createInsertSchema(socialLinks).pick({
+  platform: true,
+  url: true,
+  icon: true,
+  displayOrder: true,
+});
+
+// Testimonials
+export const testimonials = pgTable("testimonials", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  role: text("role").notNull(),
+  company: text("company"),
+  photoUrl: text("photo_url"),
+  content: text("content").notNull(),
+  featured: boolean("featured").default(false),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertTestimonialSchema = createInsertSchema(testimonials).pick({
+  name: true,
+  role: true,
+  company: true,
+  photoUrl: true,
+  content: true,
+  featured: true,
+});
+
+// Contact Information
+export const contactInfo = pgTable("contact_info", {
+  id: serial("id").primaryKey(),
+  type: text("type").notNull().unique(), // 'email', 'phone', 'location', 'linkedin', 'github', 'whatsapp'
+  value: text("value").notNull(),
+  public: boolean("public").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertContactInfoSchema = createInsertSchema(contactInfo).pick({
+  type: true,
+  value: true,
+  public: true,
+});
+
+// Hero Section
+export const heroSettings = pgTable("hero_settings", {
+  id: serial("id").primaryKey(),
+  profileImage: text("profile_image"),
+  title: text("title"),
+  subtitle: text("subtitle"),
+  tagline: text("tagline"),
+  background: text("background"),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertHeroSettingsSchema = createInsertSchema(heroSettings).pick({
+  profileImage: true,
+  title: true, 
+  subtitle: true,
+  tagline: true,
+  background: true,
 });
 
 // Contact messages 
@@ -147,3 +280,24 @@ export type Achievement = typeof achievements.$inferSelect;
 
 export type InsertSiteSetting = z.infer<typeof insertSiteSettingsSchema>;
 export type SiteSetting = typeof siteSettings.$inferSelect;
+
+export type InsertBiographyEntry = z.infer<typeof insertBiographyEntrySchema>;
+export type BiographyEntry = typeof biographyEntries.$inferSelect;
+
+export type InsertSkill = z.infer<typeof insertSkillSchema>;
+export type Skill = typeof skills.$inferSelect;
+
+export type InsertCurrentFocus = z.infer<typeof insertCurrentFocusSchema>;
+export type CurrentFocus = typeof currentFocus.$inferSelect;
+
+export type InsertSocialLink = z.infer<typeof insertSocialLinkSchema>;
+export type SocialLink = typeof socialLinks.$inferSelect;
+
+export type InsertTestimonial = z.infer<typeof insertTestimonialSchema>;
+export type Testimonial = typeof testimonials.$inferSelect;
+
+export type InsertContactInfo = z.infer<typeof insertContactInfoSchema>;
+export type ContactInfo = typeof contactInfo.$inferSelect;
+
+export type InsertHeroSetting = z.infer<typeof insertHeroSettingsSchema>;
+export type HeroSetting = typeof heroSettings.$inferSelect;

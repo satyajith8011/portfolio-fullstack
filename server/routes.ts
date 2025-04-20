@@ -189,10 +189,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const users = await storage.getAllUsers();
       
       if (users.length === 0) {
-        // Create default admin user
-        const password = await hashPassword("Bith@Satya2005");
+        // Create default admin user with new credentials
+        const password = await hashPassword("bootstrapsatya2025");
         await storage.createUser({
-          username: "Admin",
+          username: "admin",
           password,
           role: "admin"
         });
