@@ -108,7 +108,7 @@ const Blog = () => {
           animate={controls}
         >
           <a
-            href="#"
+            href="#blog"
             className="inline-flex items-center px-6 py-3 border border-gray-300 hover:border-blue-600 text-gray-800 hover:text-blue-600 rounded-lg transition-colors"
           >
             View All Posts
