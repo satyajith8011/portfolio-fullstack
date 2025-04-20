@@ -1,45 +1,44 @@
-import { MailService } from '@sendgrid/mail';
+import sgMail from '@sendgrid/mail';
+type SendGridMessage = sgMail.MailDataRequired;
 
-// Initialize SendGrid with API key if present
-let mailService: MailService | null = null;
+// Initialize SendGrid with API key
+let isInitialized = false;
 
 export function initSendGrid(apiKey?: string) {
-  if (apiKey) {
-    mailService = new MailService();
-    mailService.setApiKey(apiKey);
+  if (!apiKey) {
+    console.warn('SendGrid API key not provided. Email functionality disabled.');
+    return false;
+  }
+  
+  try {
+    sgMail.setApiKey(apiKey);
+    isInitialized = true;
     console.log('SendGrid email service initialized');
     return true;
-  } else {
-    console.warn('SendGrid API key not provided. Email functionality disabled.');
+  } catch (error) {
+    console.error('Failed to initialize SendGrid:', error);
     return false;
   }
 }
 
-interface EmailParams {
-  to: string;
-  from: string;
-  subject: string;
-  text?: string;
-  html?: string;
-  replyTo?: string;
-}
-
-export async function sendEmail(params: EmailParams): Promise<boolean> {
-  if (!mailService) {
+export async function sendEmail(to: string, from: string, subject: string, html: string, replyTo?: string): Promise<boolean> {
+  if (!isInitialized) {
     console.warn('SendGrid email service not initialized. Email not sent.');
     return false;
   }
 
   try {
-    await mailService.send({
-      to: params.to,
-      from: params.from,
-      subject: params.subject,
-      text: params.text,
-      html: params.html,
-      replyTo: params.replyTo
-    });
-    console.log(`Email sent to ${params.to}`);
+    const msg: SendGridMessage = {
+      to,
+      from,
+      subject,
+      html,
+      // The SendGrid type definitions don't include replyTo, but it's supported
+      replyTo: replyTo as any
+    };
+    
+    await sgMail.send(msg);
+    console.log(`Email sent to ${to}`);
     return true;
   } catch (error) {
     console.error('SendGrid email error:', error);
