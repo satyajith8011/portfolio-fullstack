@@ -78,6 +78,41 @@ const Hero = () => {
     '  createMagic();',
     '}',
   ];
+  
+  // Creative taglines that will rotate with animation
+  const taglines = [
+    "Turning Coffee into Code, and Ideas into Reality",
+    "Crafting Digital Experiences That Matter",
+    "Building the Future, One Line of Code at a Time",
+    "Where Creativity Meets Technical Excellence",
+    "Transforming Challenges into Opportunities"
+  ];
+  
+  // State to manage the current tagline and animation state
+  const [currentTaglineIndex, setCurrentTaglineIndex] = useState(0);
+  const [isTaglineAnimating, setIsTaglineAnimating] = useState(false);
+  
+  // Cycle through taglines with animation
+  useEffect(() => {
+    const taglineInterval = setInterval(() => {
+      setIsTaglineAnimating(true);
+      
+      // Wait for exit animation, then change tagline
+      setTimeout(() => {
+        setCurrentTaglineIndex((prevIndex) => 
+          prevIndex === taglines.length - 1 ? 0 : prevIndex + 1
+        );
+        
+        // Start entrance animation
+        setTimeout(() => {
+          setIsTaglineAnimating(false);
+        }, 300);
+      }, 500);
+      
+    }, 5000); // Change every 5 seconds
+    
+    return () => clearInterval(taglineInterval);
+  }, []);
 
   return (
     <section
@@ -158,10 +193,41 @@ const Hero = () => {
             <motion.div
               variants={itemVariants}
               className="relative"
+              style={{ minHeight: "2.5rem" }} // Keep height consistent during transitions
             >
-              <p className="text-xl md:text-2xl text-gray-600 font-['Space_Grotesk'] relative z-10">
-                Turning Coffee into Code, and Ideas into Reality
-              </p>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentTaglineIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ 
+                    opacity: isTaglineAnimating ? 0 : 1, 
+                    y: isTaglineAnimating ? -20 : 0,
+                    transition: { 
+                      duration: 0.5,
+                      ease: "easeInOut"
+                    }
+                  }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="relative z-10"
+                >
+                  <p className="text-xl md:text-2xl text-gray-600 font-['Space_Grotesk'] tagline-highlight">
+                    {taglines[currentTaglineIndex].split(' ').map((word, i) => (
+                      <span 
+                        key={i} 
+                        className={i % 3 === 1 ? "shimmer-text text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500" : ""}
+                        style={{ 
+                          animationDelay: `${i * 0.1}s`,
+                          display: 'inline-block',
+                          marginRight: '0.3rem'
+                        }}
+                      >
+                        {word}
+                      </span>
+                    ))}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+              
               <motion.div 
                 className="absolute bottom-0 left-0 h-3 bg-yellow-200/70 w-full -z-0 rounded"
                 initial={{ width: 0 }}
