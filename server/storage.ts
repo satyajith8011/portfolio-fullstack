@@ -16,7 +16,28 @@ import {
   type InsertAchievement,
   siteSettings,
   type SiteSetting,
-  type InsertSiteSetting
+  type InsertSiteSetting,
+  contactInfo,
+  type ContactInfo,
+  type InsertContactInfo,
+  socialLinks,
+  type SocialLink,
+  type InsertSocialLink,
+  testimonials,
+  type Testimonial,
+  type InsertTestimonial,
+  heroSettings,
+  type HeroSetting,
+  type InsertHeroSetting,
+  currentFocus,
+  type CurrentFocus,
+  type InsertCurrentFocus,
+  biographyEntries,
+  type BiographyEntry,
+  type InsertBiographyEntry,
+  skills,
+  type Skill,
+  type InsertSkill
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, asc, and, sql, like, isNull, not } from "drizzle-orm";
@@ -74,6 +95,53 @@ export interface IStorage {
   getSetting(key: string): Promise<SiteSetting | undefined>;
   getAllSettings(): Promise<SiteSetting[]>;
   updateSetting(key: string, value: string | null, valueJson?: any): Promise<SiteSetting | undefined>;
+  
+  // Contact info operations
+  getContactInfo(): Promise<ContactInfo[]>;
+  createContactInfo(contactInfo: InsertContactInfo): Promise<ContactInfo>;
+  updateContactInfo(id: number, data: Partial<InsertContactInfo>): Promise<ContactInfo | undefined>;
+  deleteContactInfo(id: number): Promise<boolean>;
+  
+  // Social links operations
+  getSocialLinks(): Promise<SocialLink[]>;
+  createSocialLink(socialLink: InsertSocialLink): Promise<SocialLink>;
+  updateSocialLink(id: number, data: Partial<InsertSocialLink>): Promise<SocialLink | undefined>;
+  deleteSocialLink(id: number): Promise<boolean>;
+  updateSocialLinkOrder(id: number, direction: 'up' | 'down'): Promise<SocialLink | undefined>;
+  
+  // Testimonials operations
+  getTestimonials(): Promise<Testimonial[]>;
+  createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial>;
+  updateTestimonial(id: number, data: Partial<InsertTestimonial>): Promise<Testimonial | undefined>;
+  deleteTestimonial(id: number): Promise<boolean>;
+  
+  // Hero settings operations
+  getHeroSettings(): Promise<HeroSetting | undefined>;
+  updateHeroSettings(data: Partial<InsertHeroSetting>): Promise<HeroSetting>;
+  
+  // Current focus operations
+  getCurrentFocus(): Promise<CurrentFocus[]>;
+  createCurrentFocus(focus: InsertCurrentFocus): Promise<CurrentFocus>;
+  updateCurrentFocus(id: number, data: Partial<InsertCurrentFocus>): Promise<CurrentFocus | undefined>;
+  deleteCurrentFocus(id: number): Promise<boolean>;
+  updateCurrentFocusOrder(id: number, direction: 'up' | 'down'): Promise<CurrentFocus | undefined>;
+  
+  // Resume operations
+  getResumeSetting(): Promise<{ url: string; is_public: boolean; type: string } | undefined>;
+  updateResumeSetting(data: { url: string; is_public: boolean; type: string }): Promise<{ url: string; is_public: boolean; type: string }>;
+  deleteResumeSetting(): Promise<boolean>;
+  
+  // Biography operations
+  getBiographyEntries(): Promise<BiographyEntry[]>;
+  createBiographyEntry(entry: InsertBiographyEntry): Promise<BiographyEntry>;
+  updateBiographyEntry(id: number, data: Partial<InsertBiographyEntry>): Promise<BiographyEntry | undefined>;
+  deleteBiographyEntry(id: number): Promise<boolean>;
+  
+  // Skills operations
+  getSkills(): Promise<Skill[]>;
+  createSkill(skill: InsertSkill): Promise<Skill>;
+  updateSkill(id: number, data: Partial<InsertSkill>): Promise<Skill | undefined>;
+  deleteSkill(id: number): Promise<boolean>;
 }
 
 export class DatabaseStorage implements IStorage {

@@ -385,6 +385,389 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // CONTACT INFO ROUTES
+  // Get all contact info
+  app.get("/api/admin/contact", isAdmin, async (req, res) => {
+    try {
+      const contactInfo = await storage.getContactInfo();
+      res.json(contactInfo);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Create contact info
+  app.post("/api/admin/contact", isAdmin, async (req, res) => {
+    try {
+      const contactInfo = await storage.createContactInfo(req.body);
+      res.status(201).json(contactInfo);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Update contact info
+  app.put("/api/admin/contact/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const contactInfo = await storage.updateContactInfo(id, req.body);
+      
+      if (!contactInfo) {
+        return res.status(404).json({ message: "Contact info not found" });
+      }
+      
+      res.json(contactInfo);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Delete contact info
+  app.delete("/api/admin/contact/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteContactInfo(id);
+      res.json({ success: true });
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Update contact info public status
+  app.patch("/api/admin/contact/:id/public", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const { public: isPublic } = req.body;
+      const contactInfo = await storage.updateContactInfo(id, { public: isPublic });
+      
+      if (!contactInfo) {
+        return res.status(404).json({ message: "Contact info not found" });
+      }
+      
+      res.json(contactInfo);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // SOCIAL LINKS ROUTES
+  // Get all social links
+  app.get("/api/admin/social", isAdmin, async (req, res) => {
+    try {
+      const socialLinks = await storage.getSocialLinks();
+      res.json(socialLinks);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Create social link
+  app.post("/api/admin/social", isAdmin, async (req, res) => {
+    try {
+      const socialLink = await storage.createSocialLink(req.body);
+      res.status(201).json(socialLink);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Update social link
+  app.put("/api/admin/social/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const socialLink = await storage.updateSocialLink(id, req.body);
+      
+      if (!socialLink) {
+        return res.status(404).json({ message: "Social link not found" });
+      }
+      
+      res.json(socialLink);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Delete social link
+  app.delete("/api/admin/social/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteSocialLink(id);
+      res.json({ success: true });
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Update social link order
+  app.patch("/api/admin/social/:id/order", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const { direction } = req.body;
+      
+      // This is a placeholder - the actual implementation would need to handle the
+      // ordering logic appropriately, potentially swapping display_order with another item
+      const socialLink = await storage.updateSocialLinkOrder(id, direction);
+      
+      if (!socialLink) {
+        return res.status(404).json({ message: "Social link not found" });
+      }
+      
+      res.json(socialLink);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // TESTIMONIALS ROUTES
+  // Get all testimonials
+  app.get("/api/admin/testimonials", isAdmin, async (req, res) => {
+    try {
+      const testimonials = await storage.getTestimonials();
+      res.json(testimonials);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Create testimonial
+  app.post("/api/admin/testimonials", isAdmin, async (req, res) => {
+    try {
+      const testimonial = await storage.createTestimonial(req.body);
+      res.status(201).json(testimonial);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Update testimonial
+  app.put("/api/admin/testimonials/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const testimonial = await storage.updateTestimonial(id, req.body);
+      
+      if (!testimonial) {
+        return res.status(404).json({ message: "Testimonial not found" });
+      }
+      
+      res.json(testimonial);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Delete testimonial
+  app.delete("/api/admin/testimonials/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteTestimonial(id);
+      res.json({ success: true });
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Update testimonial featured status
+  app.patch("/api/admin/testimonials/:id/featured", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const { featured } = req.body;
+      const testimonial = await storage.updateTestimonial(id, { featured });
+      
+      if (!testimonial) {
+        return res.status(404).json({ message: "Testimonial not found" });
+      }
+      
+      res.json(testimonial);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // HERO SETTINGS ROUTES
+  // Get hero settings
+  app.get("/api/admin/hero", isAdmin, async (req, res) => {
+    try {
+      const heroSettings = await storage.getHeroSettings();
+      res.json(heroSettings || {});
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Update hero settings
+  app.put("/api/admin/hero", isAdmin, async (req, res) => {
+    try {
+      const heroSettings = await storage.updateHeroSettings(req.body);
+      res.json(heroSettings);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // CURRENT WORK/FOCUS ROUTES
+  // Get all focus areas
+  app.get("/api/admin/focus", isAdmin, async (req, res) => {
+    try {
+      const focusAreas = await storage.getCurrentFocus();
+      res.json(focusAreas);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Create focus area
+  app.post("/api/admin/focus", isAdmin, async (req, res) => {
+    try {
+      const focusArea = await storage.createCurrentFocus(req.body);
+      res.status(201).json(focusArea);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Update focus area
+  app.put("/api/admin/focus/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const focusArea = await storage.updateCurrentFocus(id, req.body);
+      
+      if (!focusArea) {
+        return res.status(404).json({ message: "Focus area not found" });
+      }
+      
+      res.json(focusArea);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Delete focus area
+  app.delete("/api/admin/focus/:id", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteCurrentFocus(id);
+      res.json({ success: true });
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Update focus area order
+  app.patch("/api/admin/focus/:id/order", isAdmin, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const { direction } = req.body;
+      
+      // Similar to social links, would need actual ordering logic
+      const focusArea = await storage.updateCurrentFocusOrder(id, direction);
+      
+      if (!focusArea) {
+        return res.status(404).json({ message: "Focus area not found" });
+      }
+      
+      res.json(focusArea);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // RESUME ROUTES
+  // Get resume info
+  app.get("/api/admin/resume", isAdmin, async (req, res) => {
+    try {
+      // Could be stored as a special setting in the site_settings table
+      const resume = await storage.getResumeSetting();
+      res.json(resume || { url: "", is_public: true, type: "file" });
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Update resume info
+  app.put("/api/admin/resume", isAdmin, async (req, res) => {
+    try {
+      const resume = await storage.updateResumeSetting(req.body);
+      res.json(resume);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Delete resume
+  app.delete("/api/admin/resume", isAdmin, async (req, res) => {
+    try {
+      await storage.deleteResumeSetting();
+      res.json({ success: true });
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // File upload endpoint (for images, PDFs, etc.)
+  app.post("/api/admin/upload", isAdmin, async (req, res) => {
+    try {
+      // This would typically use a multipart form handler like multer
+      // and upload to a storage service like S3, Cloudinary, etc.
+      // For simplicity we're just returning a mock URL
+      res.json({ 
+        url: `https://example.com/uploads/${Date.now()}-${Math.random().toString(36).substring(2, 15)}`,
+        success: true 
+      });
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Resume file upload endpoint
+  app.post("/api/admin/upload/resume", isAdmin, async (req, res) => {
+    try {
+      // Similar to general upload, but specific for resume files
+      res.json({ 
+        url: `https://example.com/uploads/resume-${Date.now()}.pdf`,
+        success: true 
+      });
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // BIOGRAPHY ROUTES
+  // Get all biography entries
+  app.get("/api/admin/biography", isAdmin, async (req, res) => {
+    try {
+      const entries = await storage.getBiographyEntries();
+      res.json(entries);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // Get user profile
+  app.get("/api/admin/profile", isAdmin, async (req, res) => {
+    try {
+      // This could be stored as special settings or in a dedicated table
+      res.json({
+        headline: "Full Stack Developer",
+        bio: "Passionate about web development and building intuitive user experiences.",
+        quote: "Not a born genius — just someone who refused to stop learning",
+        photo: "https://example.com/profile.jpg"
+      });
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  // SKILLS ROUTES
+  // Get all skills
+  app.get("/api/admin/skills", isAdmin, async (req, res) => {
+    try {
+      const skills = await storage.getSkills();
+      res.json(skills);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
