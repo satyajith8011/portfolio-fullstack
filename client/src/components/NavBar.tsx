@@ -70,10 +70,22 @@ const NavBar = () => {
               Projects
             </a>
             <a
+              href="#current-projects"
+              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+            >
+              Current Work
+            </a>
+            <a
               href="#achievements"
               className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Achievements
+            </a>
+            <a
+              href="#testimonials"
+              className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+            >
+              Testimonials
             </a>
             <a
               href="#blog"
@@ -152,11 +164,39 @@ const NavBar = () => {
                   About Me
                 </a>
                 <a
+                  href="#skills"
+                  className="py-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  Skills
+                </a>
+                <a
                   href="#projects"
                   className="py-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                   onClick={closeMobileMenu}
                 >
                   Projects
+                </a>
+                <a
+                  href="#current-projects"
+                  className="py-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  Current Work
+                </a>
+                <a
+                  href="#achievements"
+                  className="py-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  Achievements
+                </a>
+                <a
+                  href="#testimonials"
+                  className="py-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  Testimonials
                 </a>
                 <a
                   href="#blog"
