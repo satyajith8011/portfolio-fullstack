@@ -425,75 +425,32 @@ const Hero = () => {
                     }}
                   />
                   
-                  {/* Modern digital scan effect */}
+                  {/* Simple elegant glow effect */}
                   <motion.div 
                     className="absolute inset-0 rounded-full pointer-events-none overflow-hidden"
                   >
-                    {/* Scanning line effect */}
+                    {/* Subtle border glow */}
                     <motion.div
-                      className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400/0 via-blue-400/70 to-blue-400/0"
-                      initial={{ y: -10 }}
-                      animate={{ y: 200 }}
+                      className="absolute inset-0 rounded-full border-2 border-white/20"
+                      animate={{ 
+                        boxShadow: [
+                          "0 0 0 rgba(255, 255, 255, 0)",
+                          "0 0 10px rgba(255, 255, 255, 0.3)",
+                          "0 0 0 rgba(255, 255, 255, 0)"
+                        ] 
+                      }}
                       transition={{
-                        duration: 2.5,
+                        duration: 3,
                         repeat: Infinity,
-                        ease: "linear",
-                        repeatType: "loop"
+                        ease: "easeInOut"
                       }}
                     />
                     
-                    {/* Modern digital frame */}
-                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-                      {/* Top left corner */}
-                      <motion.path 
-                        d="M 0,15 L 0,0 L 15,0" 
-                        stroke="#3b82f6" 
-                        strokeWidth="1.5"
-                        fill="none"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1, delay: 0, repeat: Infinity, repeatDelay: 5 }}
-                      />
-                      
-                      {/* Top right corner */}
-                      <motion.path 
-                        d="M 85,0 L 100,0 L 100,15" 
-                        stroke="#8b5cf6" 
-                        strokeWidth="1.5"
-                        fill="none"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1, delay: 0.25, repeat: Infinity, repeatDelay: 5 }}
-                      />
-                      
-                      {/* Bottom right corner */}
-                      <motion.path 
-                        d="M 100,85 L 100,100 L 85,100" 
-                        stroke="#ec4899" 
-                        strokeWidth="1.5"
-                        fill="none"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1, delay: 0.5, repeat: Infinity, repeatDelay: 5 }}
-                      />
-                      
-                      {/* Bottom left corner */}
-                      <motion.path 
-                        d="M 15,100 L 0,100 L 0,85" 
-                        stroke="#3b82f6" 
-                        strokeWidth="1.5"
-                        fill="none"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1, delay: 0.75, repeat: Infinity, repeatDelay: 5 }}
-                      />
-                    </svg>
-                    
-                    {/* Subtle radial gradient */}
+                    {/* Simple inner radial gradient */}
                     <div 
                       className="absolute inset-0 rounded-full"
                       style={{
-                        background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(59,130,246,0.05) 70%, rgba(147,51,234,0.1) 100%)"
+                        background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(59,130,246,0.05) 70%, rgba(147,51,234,0.05) 100%)"
                       }}
                     />
                   </motion.div>
