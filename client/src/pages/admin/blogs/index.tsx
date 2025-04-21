@@ -203,11 +203,18 @@ export default function AdminBlogsPage() {
                   </div>
                 )}
                 <div className="flex flex-wrap gap-1 mt-3">
-                  {post.tags?.split(',').map((tag: string, index: number) => (
-                    <Badge key={index} variant="secondary" className="text-xs">
-                      {tag.trim()}
-                    </Badge>
-                  ))}
+                  {Array.isArray(post.tags) 
+                    ? post.tags.map((tag: string, index: number) => (
+                        <Badge key={index} variant="secondary" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))
+                    : post.tags?.split(',').map((tag: string, index: number) => (
+                        <Badge key={index} variant="secondary" className="text-xs">
+                          {tag.trim()}
+                        </Badge>
+                      ))
+                  }
                 </div>
               </CardContent>
               <CardFooter className="pt-3 flex justify-end items-center border-t gap-2">

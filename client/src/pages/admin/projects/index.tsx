@@ -177,11 +177,18 @@ export default function AdminProjectsPage() {
                   </div>
                 )}
                 <div className="flex flex-wrap gap-1">
-                  {project.techStack?.split(',').map((tech: string, index: number) => (
-                    <Badge key={index} variant="secondary" className="text-xs">
-                      {tech.trim()}
-                    </Badge>
-                  ))}
+                  {Array.isArray(project.techStack) 
+                    ? project.techStack.map((tech: string, index: number) => (
+                        <Badge key={index} variant="secondary" className="text-xs">
+                          {tech}
+                        </Badge>
+                      ))
+                    : project.techStack?.split(',').map((tech: string, index: number) => (
+                        <Badge key={index} variant="secondary" className="text-xs">
+                          {tech.trim()}
+                        </Badge>
+                      ))
+                  }
                   {project.featured && (
                     <Badge className="bg-amber-500 text-white text-xs">Featured</Badge>
                   )}

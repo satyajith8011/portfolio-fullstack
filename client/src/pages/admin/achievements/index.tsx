@@ -195,11 +195,18 @@ export default function AdminAchievementsPage() {
                 )}
                 
                 <div className="flex flex-wrap gap-1 mt-3">
-                  {achievement.tags?.split(',').map((tag: string, index: number) => (
-                    <Badge key={index} variant="secondary" className="text-xs">
-                      {tag.trim()}
-                    </Badge>
-                  ))}
+                  {Array.isArray(achievement.tags) 
+                    ? achievement.tags.map((tag: string, index: number) => (
+                        <Badge key={index} variant="secondary" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))
+                    : achievement.tags?.split(',').map((tag: string, index: number) => (
+                        <Badge key={index} variant="secondary" className="text-xs">
+                          {tag.trim()}
+                        </Badge>
+                      ))
+                  }
                 </div>
               </CardContent>
               <CardFooter className="pt-3 flex justify-end items-center border-t gap-2">
