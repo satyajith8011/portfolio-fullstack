@@ -419,82 +419,130 @@ const Hero = () => {
                     }}
                   />
                   
-                  {/* Animated bubble glow effects */}
+                  {/* Animated circuit board outline effect */}
                   <motion.div 
-                    className="absolute inset-0 pointer-events-none"
-                    style={{ mixBlendMode: 'lighten' }}
+                    className="absolute inset-0 pointer-events-none overflow-hidden rounded-full"
                   >
-                    {/* Outer glow ring */}
-                    <motion.div
-                      className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/60 via-purple-400/40 to-pink-400/60"
-                      initial={{ opacity: 0.4, scale: 1.05 }}
-                      animate={{ 
-                        opacity: [0.4, 0.6, 0.4],
-                        scale: [1.05, 1.08, 1.05],
-                        rotate: [0, 10, 0]
-                      }}
-                      transition={{
-                        duration: 8,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      style={{ filter: "blur(8px)" }}
-                    />
+                    {/* Animated circuit paths */}
+                    <svg
+                      className="absolute inset-0 w-full h-full"
+                      viewBox="0 0 200 200"
+                      xmlns="http://www.w3.org/2000/svg"
+                      style={{ opacity: 0.7 }}
+                    >
+                      <defs>
+                        <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="50%" stopColor="#8b5cf6" />
+                          <stop offset="100%" stopColor="#ec4899" />
+                        </linearGradient>
+                      </defs>
+                      
+                      <motion.path
+                        d="M100,10 C150,10 190,50 190,100 C190,150 150,190 100,190 C50,190 10,150 10,100 C10,50 50,10 100,10 Z"
+                        fill="none"
+                        stroke="url(#circuit-gradient)"
+                        strokeWidth="1.5"
+                        strokeDasharray="5,3"
+                        initial={{ pathLength: 0, strokeDashoffset: 0 }}
+                        animate={{
+                          pathLength: [0, 1],
+                          strokeDashoffset: ["0%", "100%"]
+                        }}
+                        transition={{
+                          duration: 15,
+                          ease: "linear",
+                          repeat: Infinity
+                        }}
+                      />
+                      
+                      {/* Data nodes */}
+                      {[30, 50, 70, 90, 110, 130, 150, 170].map((pos, i) => (
+                        <motion.circle
+                          key={i}
+                          cx={pos}
+                          cy={i % 2 === 0 ? 25 : 175}
+                          r="3"
+                          fill={i % 3 === 0 ? "#3b82f6" : i % 3 === 1 ? "#8b5cf6" : "#ec4899"}
+                          initial={{ opacity: 0.2 }}
+                          animate={{ 
+                            opacity: [0.2, 1, 0.2],
+                            scale: [1, 1.5, 1]
+                          }}
+                          transition={{
+                            duration: 2 + i * 0.5,
+                            repeat: Infinity,
+                            repeatType: "loop",
+                            delay: i * 0.3
+                          }}
+                        />
+                      ))}
+                      
+                      {/* Pulse rings */}
+                      {[0, 1, 2].map((i) => (
+                        <motion.circle
+                          key={i}
+                          cx="100"
+                          cy="100"
+                          r="95"
+                          fill="none"
+                          stroke="url(#circuit-gradient)"
+                          strokeWidth="0.5"
+                          initial={{ scale: 0.8, opacity: 0 }}
+                          animate={{ 
+                            scale: [0.8, 1.1],
+                            opacity: [0, 0.4, 0]
+                          }}
+                          transition={{
+                            duration: 6,
+                            repeat: Infinity,
+                            repeatType: "loop",
+                            delay: i * 2,
+                            ease: "easeOut"
+                          }}
+                        />
+                      ))}
+                      
+                      {/* Glowing corner points */}
+                      {[
+                        { x: 25, y: 25 }, { x: 175, y: 25 }, 
+                        { x: 25, y: 175 }, { x: 175, y: 175 }
+                      ].map((pos, i) => (
+                        <motion.circle
+                          key={i}
+                          cx={pos.x}
+                          cy={pos.y}
+                          r="4"
+                          fill={i % 2 === 0 ? "#3b82f6" : "#ec4899"}
+                          animate={{ 
+                            opacity: [0.6, 1, 0.6],
+                            r: [4, 6, 4]
+                          }}
+                          transition={{
+                            duration: 4,
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                            delay: i * 0.5
+                          }}
+                        />
+                      ))}
+                    </svg>
                     
-                    {/* Top-right bubble */}
+                    {/* Holographic overlay */}
                     <motion.div
-                      className="absolute h-12 w-12 rounded-full bg-cyan-300/70"
-                      initial={{ top: "15%", right: "5%", opacity: 0.6 }}
-                      animate={{ 
-                        top: ["15%", "10%", "15%"],
-                        right: ["5%", "8%", "5%"],
-                        opacity: [0.6, 0.8, 0.6],
-                        scale: [1, 1.2, 1]
+                      className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-purple-500/10 rounded-full"
+                      animate={{
+                        background: [
+                          "linear-gradient(to right top, rgba(59, 130, 246, 0.1), rgba(0, 0, 0, 0), rgba(139, 92, 246, 0.1))",
+                          "linear-gradient(to right top, rgba(139, 92, 246, 0.1), rgba(0, 0, 0, 0), rgba(236, 72, 153, 0.1))",
+                          "linear-gradient(to right top, rgba(236, 72, 153, 0.1), rgba(0, 0, 0, 0), rgba(59, 130, 246, 0.1))"
+                        ]
                       }}
                       transition={{
-                        duration: 5,
+                        duration: 10,
                         repeat: Infinity,
-                        ease: "easeInOut"
+                        ease: "linear"
                       }}
-                      style={{ filter: "blur(4px)" }}
-                    />
-                    
-                    {/* Bottom-left bubble */}
-                    <motion.div
-                      className="absolute h-10 w-10 rounded-full bg-purple-400/70"
-                      initial={{ bottom: "15%", left: "10%", opacity: 0.7 }}
-                      animate={{ 
-                        bottom: ["15%", "18%", "15%"],
-                        left: ["10%", "8%", "10%"],
-                        opacity: [0.7, 0.9, 0.7],
-                        scale: [1, 1.1, 1]
-                      }}
-                      transition={{
-                        duration: 6,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 0.5
-                      }}
-                      style={{ filter: "blur(3px)" }}
-                    />
-                    
-                    {/* Center-right bubble */}
-                    <motion.div
-                      className="absolute h-8 w-8 rounded-full bg-pink-300/70"
-                      initial={{ top: "50%", right: "5%", opacity: 0.6 }}
-                      animate={{ 
-                        top: ["50%", "48%", "50%"],
-                        right: ["5%", "8%", "5%"],
-                        opacity: [0.6, 0.8, 0.6],
-                        scale: [1, 1.2, 1]
-                      }}
-                      transition={{
-                        duration: 7,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 1
-                      }}
-                      style={{ filter: "blur(3px)" }}
                     />
                   </motion.div>
                 </motion.div>
