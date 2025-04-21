@@ -367,34 +367,7 @@ const Hero = () => {
             >
               {/* Creative photo container with static design */}
               <div className="photo-frame-outer w-full h-full relative">
-                {/* Code pattern background */}
-                <div className="absolute inset-0 overflow-hidden opacity-10">
-                  <svg
-                    className="w-full h-full"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="none"
-                  >
-                    <defs>
-                      <pattern
-                        id="tech-pattern"
-                        patternUnits="userSpaceOnUse"
-                        width="50"
-                        height="50"
-                        patternTransform="scale(0.75) rotate(0)"
-                      >
-                        <rect width="100%" height="100%" fill="transparent" />
-                        <text x="10" y="10" fill="#3b82f6" fontSize="5">0 1</text>
-                        <text x="25" y="15" fill="#8b5cf6" fontSize="4">{ }</text>
-                        <text x="5" y="25" fill="#ec4899" fontSize="4">&lt;/&gt;</text>
-                        <text x="35" y="30" fill="#3b82f6" fontSize="5">=&gt;</text>
-                        <text x="20" y="40" fill="#8b5cf6" fontSize="4">$ _</text>
-                        <text x="40" y="45" fill="#ec4899" fontSize="5">2 5</text>
-                      </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#tech-pattern)" />
-                  </svg>
-                </div>
-                
+
                 {/* Simple clean photo frame */}
                 <div className="photo-frame-inner w-full h-full rounded-full border-4 border-white shadow-xl overflow-hidden">
                   {/* Profile image */}
@@ -408,16 +381,8 @@ const Hero = () => {
                     }}
                   />
                   
-                  {/* Simple elegant glow effect */}
-                  <div className="absolute inset-0 rounded-full pointer-events-none overflow-hidden">
-                    <div className="absolute inset-0 rounded-full border-2 border-white/20" />
-                    <div 
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(59,130,246,0.05) 70%, rgba(147,51,234,0.05) 100%)"
-                      }}
-                    />
-                  </div>
+                  {/* Simple subtle shadow */}
+                  <div className="absolute inset-0 rounded-full shadow-inner pointer-events-none"></div>
                 </div>
               </div>
               
