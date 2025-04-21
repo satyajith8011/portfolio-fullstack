@@ -180,6 +180,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       handleError(res, error);
     }
   });
+  
+  // Get testimonials
+  app.get("/api/testimonials", async (req, res) => {
+    try {
+      const testimonials = await storage.getTestimonials();
+      res.json(testimonials);
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
 
   // ADMIN ROUTES (protected)
 

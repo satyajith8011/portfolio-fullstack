@@ -123,7 +123,7 @@ const Testimonials = () => {
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-orange-100 dark:bg-orange-900/20 rounded-full filter blur-3xl opacity-30 transform translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-100 dark:bg-blue-900/20 rounded-full filter blur-3xl opacity-30 transform -translate-x-1/3 translate-y-1/3"></div>
 
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 relative" style={{ position: 'relative' }}>
         <motion.div
           className="text-center mb-16"
           variants={sectionVariants}
