@@ -406,13 +406,9 @@ const Hero = () => {
                   </svg>
                 </div>
                 
-                {/* Main photo frame with shine effect */}
+                {/* Main photo frame with clean border */}
                 <motion.div 
-                  className="photo-frame-inner w-full h-full rounded-full border-4 border-white shadow-xl overflow-hidden bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500"
-                  style={{ 
-                    backgroundSize: "200% 200%",
-                    animation: "gradient-animation 5s ease infinite"
-                  }}
+                  className="photo-frame-inner w-full h-full rounded-full border-4 border-white shadow-xl overflow-hidden"
                 >
                   {/* Profile image with mask filter */}
                   <img 
