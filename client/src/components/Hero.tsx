@@ -419,18 +419,84 @@ const Hero = () => {
                     }}
                   />
                   
-                  {/* Overlay glow effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 via-transparent to-purple-500/20 rounded-full"
-                    animate={{
-                      opacity: [0.3, 0.6, 0.3]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      repeatType: "reverse"
-                    }}
-                  />
+                  {/* Animated bubble glow effects */}
+                  <motion.div 
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ mixBlendMode: 'lighten' }}
+                  >
+                    {/* Outer glow ring */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/60 via-purple-400/40 to-pink-400/60"
+                      initial={{ opacity: 0.4, scale: 1.05 }}
+                      animate={{ 
+                        opacity: [0.4, 0.6, 0.4],
+                        scale: [1.05, 1.08, 1.05],
+                        rotate: [0, 10, 0]
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      style={{ filter: "blur(8px)" }}
+                    />
+                    
+                    {/* Top-right bubble */}
+                    <motion.div
+                      className="absolute h-12 w-12 rounded-full bg-cyan-300/70"
+                      initial={{ top: "15%", right: "5%", opacity: 0.6 }}
+                      animate={{ 
+                        top: ["15%", "10%", "15%"],
+                        right: ["5%", "8%", "5%"],
+                        opacity: [0.6, 0.8, 0.6],
+                        scale: [1, 1.2, 1]
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      style={{ filter: "blur(4px)" }}
+                    />
+                    
+                    {/* Bottom-left bubble */}
+                    <motion.div
+                      className="absolute h-10 w-10 rounded-full bg-purple-400/70"
+                      initial={{ bottom: "15%", left: "10%", opacity: 0.7 }}
+                      animate={{ 
+                        bottom: ["15%", "18%", "15%"],
+                        left: ["10%", "8%", "10%"],
+                        opacity: [0.7, 0.9, 0.7],
+                        scale: [1, 1.1, 1]
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 0.5
+                      }}
+                      style={{ filter: "blur(3px)" }}
+                    />
+                    
+                    {/* Center-right bubble */}
+                    <motion.div
+                      className="absolute h-8 w-8 rounded-full bg-pink-300/70"
+                      initial={{ top: "50%", right: "5%", opacity: 0.6 }}
+                      animate={{ 
+                        top: ["50%", "48%", "50%"],
+                        right: ["5%", "8%", "5%"],
+                        opacity: [0.6, 0.8, 0.6],
+                        scale: [1, 1.2, 1]
+                      }}
+                      transition={{
+                        duration: 7,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 1
+                      }}
+                      style={{ filter: "blur(3px)" }}
+                    />
+                  </motion.div>
                 </motion.div>
               </motion.div>
               
