@@ -365,12 +365,52 @@ const Hero = () => {
               className="relative w-64 h-64 md:w-80 md:h-80"
               style={{ y: useTransform(scrollY, [0, 300], [0, -50]) }}
             >
-              {/* Creative photo container with static design */}
-              <div className="photo-frame-outer w-full h-full relative">
-
-                {/* Simple clean photo frame */}
-                <div className="photo-frame-inner w-full h-full rounded-full border-4 border-white shadow-xl overflow-hidden">
-                  {/* Profile image */}
+              {/* Creative photo container with advanced effects */}
+              <motion.div
+                animate={{ 
+                  rotate: [0, 2, 0, -2, 0], 
+                  scale: [1, 1.02, 1, 1.02, 1] 
+                }}
+                transition={{ 
+                  duration: 8, 
+                  repeat: Infinity,
+                  repeatType: "loop" 
+                }}
+                className="photo-frame-outer w-full h-full relative"
+              >
+                {/* Modern code matrix background */}
+                <div className="absolute inset-0 overflow-hidden opacity-10">
+                  <svg
+                    className="w-full h-full"
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="none"
+                  >
+                    <defs>
+                      <pattern
+                        id="tech-pattern"
+                        patternUnits="userSpaceOnUse"
+                        width="50"
+                        height="50"
+                        patternTransform="scale(0.75) rotate(0)"
+                      >
+                        <rect width="100%" height="100%" fill="transparent" />
+                        <text x="10" y="10" fill="#3b82f6" fontSize="5">0 1</text>
+                        <text x="25" y="15" fill="#8b5cf6" fontSize="4">{ }</text>
+                        <text x="5" y="25" fill="#ec4899" fontSize="4">&lt;/&gt;</text>
+                        <text x="35" y="30" fill="#3b82f6" fontSize="5">=&gt;</text>
+                        <text x="20" y="40" fill="#8b5cf6" fontSize="4">$ _</text>
+                        <text x="40" y="45" fill="#ec4899" fontSize="5">2 5</text>
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#tech-pattern)" />
+                  </svg>
+                </div>
+                
+                {/* Main photo frame with clean border */}
+                <motion.div 
+                  className="photo-frame-inner w-full h-full rounded-full border-4 border-white shadow-xl overflow-hidden"
+                >
+                  {/* Profile image with mask filter */}
                   <img 
                     src={ProfilePhoto} 
                     alt="Satyajit Halder" 
@@ -381,20 +421,58 @@ const Hero = () => {
                     }}
                   />
                   
-                  {/* Simple subtle shadow */}
-                  <div className="absolute inset-0 rounded-full shadow-inner pointer-events-none"></div>
-                </div>
-              </div>
+                  {/* Simple elegant glow effect */}
+                  <motion.div 
+                    className="absolute inset-0 rounded-full pointer-events-none overflow-hidden"
+                  >
+                    {/* Subtle border glow */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border-2 border-white/20"
+                      animate={{ 
+                        boxShadow: [
+                          "0 0 0 rgba(255, 255, 255, 0)",
+                          "0 0 10px rgba(255, 255, 255, 0.3)",
+                          "0 0 0 rgba(255, 255, 255, 0)"
+                        ] 
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                    
+                    {/* Simple inner radial gradient */}
+                    <div 
+                      className="absolute inset-0 rounded-full"
+                      style={{
+                        background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(59,130,246,0.05) 70%, rgba(147,51,234,0.05) 100%)"
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
+              </motion.div>
               
-              {/* Tech skill badges */}
+              {/* Modern tech skill badges */}
               <motion.div 
                 className="absolute -top-2 -right-2 flex items-center justify-center"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <div className="w-14 h-14 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white shadow-lg">
-                  <Code className="h-7 w-7" />
+                <div className="relative">
+                  <div className="w-14 h-14 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white shadow-lg">
+                    <Code className="h-7 w-7" />
+                  </div>
+                  <motion.div 
+                    className="absolute inset-0 rounded-full border-2 border-white/30"
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity, 
+                      ease: "easeInOut" 
+                    }}
+                  />
                 </div>
               </motion.div>
               
@@ -404,8 +482,20 @@ const Hero = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white shadow-lg">
-                  <Coffee className="h-6 w-6" />
+                <div className="relative">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white shadow-lg">
+                    <Coffee className="h-6 w-6" />
+                  </div>
+                  <motion.div 
+                    className="absolute inset-0 rounded-full border-2 border-white/30"
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{ 
+                      duration: 3.5, 
+                      repeat: Infinity, 
+                      ease: "easeInOut",
+                      delay: 0.5
+                    }}
+                  />
                 </div>
               </motion.div>
               
@@ -415,15 +505,29 @@ const Hero = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                  </svg>
+                <div className="relative">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </div>
+                  <motion.div 
+                    className="absolute inset-0 rounded-full border-2 border-white/30"
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{ 
+                      duration: 4, 
+                      repeat: Infinity, 
+                      ease: "easeInOut",
+                      delay: 1
+                    }}
+                  />
                 </div>
               </motion.div>
             </motion.div>
           </motion.div>
         </div>
+        
+
       </div>
 
       {/* Background animated elements */}
