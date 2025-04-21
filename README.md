@@ -2,7 +2,6 @@
 
 A modern, responsive, and feature-rich portfolio website with an integrated admin dashboard for content management. This full-stack application showcases professional achievements, projects, skills, and blog posts with a clean and engaging user interface.
 
-![Portfolio Website](https://images.example.com/portfolio-preview.jpg)
 
 ## 🚀 Features
 
@@ -93,16 +92,6 @@ npm run db:push
 ```bash
 npm run dev
 ```
-
-6. Access the application:
-- Frontend: [http://localhost:5000](http://localhost:5000)
-- Admin dashboard: [http://localhost:5000/admin](http://localhost:5000/admin)
-
-## 🔐 Admin Access
-
-Default admin credentials:
-- Username: `admin`
-- Password: `bootstrapsatya2025`
 
 It's recommended to change the password after first login.
 
@@ -223,16 +212,6 @@ The application includes an optional contact form that uses SendGrid to send ema
 2. Add the key to your environment variables
 3. The contact form will automatically work
 
-### Custom Theming
-Edit the theme.json file to customize the site's color scheme:
-```json
-{
-  "primary": "#3b82f6",
-  "variant": "professional",
-  "appearance": "system",
-  "radius": 0.5
-}
-```
 
 ## 🔍 Important Notes
 
