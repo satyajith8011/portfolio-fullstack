@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import NavBar from "@/components/NavBar";
-import NewHero from "@/components/NewHero";
+import Hero from "@/components/Hero";
 import Biography from "@/components/Biography";
 import AboutMe from "@/components/AboutMe";
 import Projects from "@/components/Projects";
@@ -119,7 +119,7 @@ const HomePage = () => {
         
         <NavBar />
         <main>
-          <NewHero />
+          <Hero />
           <Biography />
           <AboutMe />
           <Skills />
