@@ -378,26 +378,32 @@ const Hero = () => {
                 }}
                 className="photo-frame-outer w-full h-full relative"
               >
-                {/* Rainbow colored particles */}
-                <div className="particles">
-                  {[...Array(12)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="particle"
-                      style={{
-                        top: `${Math.random() * 100}%`,
-                        left: `${Math.random() * 100}%`,
-                        backgroundColor: 
-                          i % 5 === 0 ? "#3b82f6" : 
-                          i % 5 === 1 ? "#8b5cf6" : 
-                          i % 5 === 2 ? "#ec4899" : 
-                          i % 5 === 3 ? "#f59e0b" : 
-                          "#10b981",
-                        animationDelay: `${Math.random() * 2}s`,
-                        animationDuration: `${5 + Math.random() * 5}s`
-                      }}
-                    />
-                  ))}
+                {/* Modern code matrix background */}
+                <div className="absolute inset-0 overflow-hidden opacity-10">
+                  <svg
+                    className="w-full h-full"
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="none"
+                  >
+                    <defs>
+                      <pattern
+                        id="tech-pattern"
+                        patternUnits="userSpaceOnUse"
+                        width="50"
+                        height="50"
+                        patternTransform="scale(0.75) rotate(0)"
+                      >
+                        <rect width="100%" height="100%" fill="transparent" />
+                        <text x="10" y="10" fill="#3b82f6" fontSize="5">0 1</text>
+                        <text x="25" y="15" fill="#8b5cf6" fontSize="4">{ }</text>
+                        <text x="5" y="25" fill="#ec4899" fontSize="4">&lt;/&gt;</text>
+                        <text x="35" y="30" fill="#3b82f6" fontSize="5">=&gt;</text>
+                        <text x="20" y="40" fill="#8b5cf6" fontSize="4">$ _</text>
+                        <text x="40" y="45" fill="#ec4899" fontSize="5">2 5</text>
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#tech-pattern)" />
+                  </svg>
                 </div>
                 
                 {/* Main photo frame with shine effect */}
@@ -419,104 +425,150 @@ const Hero = () => {
                     }}
                   />
                   
-                  {/* Simple elegant orbital ring effect */}
+                  {/* Modern digital scan effect */}
                   <motion.div 
-                    className="absolute inset-0 rounded-full pointer-events-none"
-                    style={{ mixBlendMode: 'lighten' }}
+                    className="absolute inset-0 rounded-full pointer-events-none overflow-hidden"
                   >
-                    {/* Rotating orbital rings */}
+                    {/* Scanning line effect */}
                     <motion.div
-                      className="absolute inset-0 rounded-full border-2 border-blue-400/40"
-                      animate={{
-                        rotate: [0, 360]
-                      }}
+                      className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400/0 via-blue-400/70 to-blue-400/0"
+                      initial={{ y: -10 }}
+                      animate={{ y: 200 }}
                       transition={{
-                        duration: 30,
+                        duration: 2.5,
+                        repeat: Infinity,
                         ease: "linear",
-                        repeat: Infinity
+                        repeatType: "loop"
                       }}
-                      style={{ borderRadius: '100%' }}
                     />
                     
-                    <motion.div
-                      className="absolute inset-2 rounded-full border-2 border-purple-400/30"
-                      animate={{
-                        rotate: [360, 0]
-                      }}
-                      transition={{
-                        duration: 25,
-                        ease: "linear",
-                        repeat: Infinity
-                      }}
-                      style={{ borderRadius: '100%' }}
-                    />
+                    {/* Modern digital frame */}
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+                      {/* Top left corner */}
+                      <motion.path 
+                        d="M 0,15 L 0,0 L 15,0" 
+                        stroke="#3b82f6" 
+                        strokeWidth="1.5"
+                        fill="none"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 1, delay: 0, repeat: Infinity, repeatDelay: 5 }}
+                      />
+                      
+                      {/* Top right corner */}
+                      <motion.path 
+                        d="M 85,0 L 100,0 L 100,15" 
+                        stroke="#8b5cf6" 
+                        strokeWidth="1.5"
+                        fill="none"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 1, delay: 0.25, repeat: Infinity, repeatDelay: 5 }}
+                      />
+                      
+                      {/* Bottom right corner */}
+                      <motion.path 
+                        d="M 100,85 L 100,100 L 85,100" 
+                        stroke="#ec4899" 
+                        strokeWidth="1.5"
+                        fill="none"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 1, delay: 0.5, repeat: Infinity, repeatDelay: 5 }}
+                      />
+                      
+                      {/* Bottom left corner */}
+                      <motion.path 
+                        d="M 15,100 L 0,100 L 0,85" 
+                        stroke="#3b82f6" 
+                        strokeWidth="1.5"
+                        fill="none"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 1, delay: 0.75, repeat: Infinity, repeatDelay: 5 }}
+                      />
+                    </svg>
                     
-                    <motion.div
-                      className="absolute inset-4 rounded-full border-2 border-pink-400/40"
-                      animate={{
-                        rotate: [0, 360]
-                      }}
-                      transition={{
-                        duration: 20,
-                        ease: "linear",
-                        repeat: Infinity
-                      }}
-                      style={{ borderRadius: '100%' }}
-                    />
-                    
-                    {/* Subtle gradient glow overlay */}
-                    <motion.div
-                      className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500/10 via-purple-500/5 to-pink-500/10"
-                      animate={{
-                        opacity: [0.5, 0.7, 0.5]
-                      }}
-                      transition={{
-                        duration: 5,
-                        ease: "easeInOut",
-                        repeat: Infinity
+                    {/* Subtle radial gradient */}
+                    <div 
+                      className="absolute inset-0 rounded-full"
+                      style={{
+                        background: "radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(59,130,246,0.05) 70%, rgba(147,51,234,0.1) 100%)"
                       }}
                     />
                   </motion.div>
                 </motion.div>
               </motion.div>
               
-              {/* Floating technology symbols */}
-              <motion.div
-                variants={floatingVariants}
-                animate="animate"
-                className="absolute -top-2 -right-2 w-14 h-14 bg-pink-500 rounded-full flex items-center justify-center text-white shadow-lg"
+              {/* Modern tech skill badges */}
+              <motion.div 
+                className="absolute -top-2 -right-2 flex items-center justify-center"
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Code className="h-7 w-7" />
+                <div className="relative">
+                  <div className="w-14 h-14 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center text-white shadow-lg">
+                    <Code className="h-7 w-7" />
+                  </div>
+                  <motion.div 
+                    className="absolute inset-0 rounded-full border-2 border-white/30"
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity, 
+                      ease: "easeInOut" 
+                    }}
+                  />
+                </div>
               </motion.div>
               
               <motion.div
-                variants={floatingVariants}
-                animate="animate"
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  delay: 1,
-                }}
-                className="absolute -bottom-2 -left-2 w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white shadow-lg z-20"
+                className="absolute -bottom-2 -left-2 flex items-center justify-center z-20"
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <Coffee className="h-6 w-6" />
+                <div className="relative">
+                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white shadow-lg">
+                    <Coffee className="h-6 w-6" />
+                  </div>
+                  <motion.div 
+                    className="absolute inset-0 rounded-full border-2 border-white/30"
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{ 
+                      duration: 3.5, 
+                      repeat: Infinity, 
+                      ease: "easeInOut",
+                      delay: 0.5
+                    }}
+                  />
+                </div>
               </motion.div>
               
               <motion.div
-                variants={floatingVariants}
-                animate="animate"
-                transition={{
-                  duration: 7,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  delay: 2,
-                }}
-                className="absolute top-1/4 -left-6 w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center text-white shadow-lg"
+                className="absolute top-1/4 -left-4 flex items-center justify-center"
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
+                <div className="relative">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </div>
+                  <motion.div 
+                    className="absolute inset-0 rounded-full border-2 border-white/30"
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{ 
+                      duration: 4, 
+                      repeat: Infinity, 
+                      ease: "easeInOut",
+                      delay: 1
+                    }}
+                  />
+                </div>
               </motion.div>
             </motion.div>
           </motion.div>
